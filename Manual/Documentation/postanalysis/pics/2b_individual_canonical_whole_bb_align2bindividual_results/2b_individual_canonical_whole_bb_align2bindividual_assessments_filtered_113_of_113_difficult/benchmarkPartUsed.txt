@@ -1,0 +1,2 @@
+# benchmarkPartUsed
+/home/oliwa/workspace/TNMA1/src/BenchmarkAssessmentsOfDifficulty/allinterfaceSuperposed/difficult.txt

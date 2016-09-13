@@ -1,0 +1,25 @@
+Wed Sep  7 19:12:26 2016    /home/haoranchen9453/Github/cNMA/Software/results/profiler.pro
+
+         10089515 function calls (10054285 primitive calls) in 34.687 seconds
+
+   Ordered by: cumulative time
+   List reduced from 792 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   34.687   34.687 /home/haoranchen9453/Github/cNMA/Software/NMAUnified.py:825(mainCalculation)
+        1    0.000    0.000   30.623   30.623 /home/haoranchen9453/Github/cNMA/Software/NMAUnified.py:313(setupNMA)
+        1    0.004    0.004   30.337   30.337 /home/haoranchen9453/Github/cNMA/Software/ANMs.py:144(calcANMsUnified)
+    42487    0.558    0.000   23.287    0.001 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/atomic/pointer.py:46(__eq__)
+        2    0.008    0.004   22.400   11.200 /home/haoranchen9453/Github/cNMA/Software/ANMs.py:1358(calcCustomH_ANew)
+    42514    0.774    0.000   21.547    0.001 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:263(__eq__)
+    42490    0.405    0.000   19.879    0.000 {all}
+   574035   13.683    0.000   19.473    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:270(<genexpr>)
+      167    0.106    0.001   18.379    0.110 /home/haoranchen9453/Github/cNMA/Software/Utils.py:370(getMatchingStructureSelections)
+      111    0.032    0.000    8.364    0.075 /home/haoranchen9453/Github/cNMA/Software/ANMs.py:2096(getCalphaPosition)
+   617321    1.381    0.000    5.795    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/numpy/core/fromnumeric.py:1964(all)
+        1    0.005    0.005    5.039    5.039 /home/haoranchen9453/Github/cNMA/Software/ANMs.py:1463(calcCustomH_ANew_IJ)
+   620918    0.881    0.000    3.119    0.000 {method 'all' of 'numpy.ndarray' objects}
+   524691    0.942    0.000    2.960    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/atomic/subset.py:110(iterAtoms)
+     2373    0.320    0.000    2.945    0.001 {zip}
+
+

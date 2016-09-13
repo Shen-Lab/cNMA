@@ -1,0 +1,7 @@
+# dataAnalyzed
+loaded pdbNames: 340
+loaded RMSDReductionsWhole: 340
+loaded listOfRMSDReductionsInterface: 340
+loaded listOfLRMSReductionsWhole: 340
+loaded listOfLRMSReductionsInterface: 340
+

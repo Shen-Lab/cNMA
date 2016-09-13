@@ -1,0 +1,71 @@
+
+\documentclass[12pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{float}
+\usepackage{txfonts}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{subfigure}
+\usepackage{textpos}
+ 
+\renewcommand{\headrulewidth}{1pt} 
+ 
+\begin{document}
+ 
+\title{Protein-Protein Docking Benchmark 4.0 Experimental Results}
+ 
+\author{Tomasz Oliwa, oliwa@ttic.edu \\ TTIC \\ 
+{\small\em \  Date:  \today }}
+\date{}
+\maketitle
+ 
+\begin{abstract}
+Benchmark 4.0 plots are presented in this document based on the following plot file:
+
+/2b-individual-canonical-whole-bb-align2bindividual-assessments-filtered-340-of-340-all/ Uk1k AssessmentWhole DifficultyAll
+
+/2b-individual-canonical-whole-bb-align2bindividual-assessments-filtered-113-of-113-difficult/ Uk1k AssessmentWhole DifficultyDifficult
+
+/2b-individual-canonical-whole-bb-align2bindividual-assessments-filtered-185-of-185-medium/ Uk1k AssessmentWhole DifficultyMedium
+
+/2b-individual-canonical-whole-bb-align2bindividual-assessments-filtered-42-of-42-rigid/ Uk1k AssessmentWhole DifficultyRigid
+ 
+\end{abstract}
+ 
+\fancyhead[R]{\small{Benchmark 4.0 RMSD reductions} }
+\fancyfoot[C]{\thepage}
+ 
+
+\newpage
+ 
+\begin{figure}
+\vspace{-4em}
+\begin{textblock}{10.2}[0,0](-0.2,-0.2)\hspace{0.2cm} 2b-individual-canonical-whole-bb-align2bindividual-assessments-filtered-340-of-340-all \ \end{textblock}
+
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDRMSDReductionoverallAllModesErrbar.pdf}}
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeDifficult.pdf}}
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeDifficultscaled.pdf}}
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeInterface.pdf}}
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeMedium.pdf}}
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeMediumscaled.pdf}}
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeProtein.pdf}}
+\subfigure{\hspace{4.4em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeRigid.pdf}}
+
+\end{figure}
+
+\newpage
+ 
+\begin{figure}
+\vspace{-4em}
+\begin{textblock}{10.2}[0,0](-0.2,-0.2)\hspace{0.2cm} 2b-individual-canonical-whole-bb-align2bindividual-assessments-filtered-340-of-340-all \ \end{textblock}
+
+\subfigure{\hspace{-2em}\includegraphics[width=7.7cm]{RMSDReductionAssessmentWholeRigidscaled.pdf}}
+
+\end{figure}
+
+ \end{document} 

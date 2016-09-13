@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}cNMA Prerequisites}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Anaconda - A collection of prerequisites}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Download of cNMA}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Modification to Prerequisites}{4}{subsection.1.3}
+\contentsline {section}{\numberline {2}Data collection}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}NMAUnified}{6}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Input}{6}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Output}{7}{subsubsection.2.1.2}
+\contentsline {subsection}{\numberline {2.2}Examples}{7}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Example 1}{7}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Example 2}{7}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Example 3}{7}{subsubsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.4}Configuration}{7}{subsubsection.2.2.4}
+\contentsline {subsubsection}{\numberline {2.2.5}Configuration Dictionary}{8}{subsubsection.2.2.5}
+\contentsline {section}{\numberline {3}Data Dictionary}{11}{section.3}
