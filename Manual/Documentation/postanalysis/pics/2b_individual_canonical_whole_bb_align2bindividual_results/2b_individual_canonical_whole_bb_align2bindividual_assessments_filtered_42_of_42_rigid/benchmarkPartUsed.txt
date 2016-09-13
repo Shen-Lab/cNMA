@@ -1,2 +1,0 @@
-# benchmarkPartUsed
-/home/oliwa/workspace/TNMA1/src/BenchmarkAssessmentsOfDifficulty/allinterfaceSuperposed/rigid.txt

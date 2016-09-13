@@ -1,7 +1,0 @@
-# dataAnalyzed
-loaded pdbNames: 185
-loaded RMSDReductionsWhole: 185
-loaded listOfRMSDReductionsInterface: 185
-loaded listOfLRMSReductionsWhole: 185
-loaded listOfLRMSReductionsInterface: 185
-
