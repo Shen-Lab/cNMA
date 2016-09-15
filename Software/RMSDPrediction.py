@@ -11,13 +11,15 @@ class RMSDPrediction(object):
 
 
 	def __init__(self,protein1_A, protein2_A=None):
-	  '''
-	  Constructor
-	  '''
-	  self.path = os.path.dirname(__file__) + "/"
-	  self.index = os.popen("if [ -e $paramsPath ]; then d=true; else d=false; fi; echo -n $d").read()
-	  self.protein1_A = protein1_A
-	  print self.protein1_A
+		'''
+		Constructor
+		'''
+		self.path = os.path.dirname(__file__) + "/"
+		os.environ['paramsPath'] = self.path+'params.txt'
+		self.index = os.popen("if [ -e $paramsPath ]; then d=true; else d=false; fi; echo -n $d").read()
+		self.protein1_A = protein1_A
+		# print paramsPath
+		# print self.index
 
 
 	def modelinput(self):
@@ -25,7 +27,7 @@ class RMSDPrediction(object):
 		Input model trained by 2c ZDOCK dataset through KRR for further prediction 
 		'''
 		if self.index == 'true':
-			self.params = np.loadtxt(self.path+"params.txt", dtype = str)		
+			self.params = np.loadtxt(self.path+"params.txt", dtype = str)       
 			filename = self.params[3] + '.joblib.pkl'
 		elif self.index == 'false':
 			filename = 'KRR.joblib.pkl'
