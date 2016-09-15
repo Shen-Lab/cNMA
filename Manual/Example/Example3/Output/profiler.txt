@@ -1,25 +1,25 @@
-Wed Sep  7 19:27:41 2016    /home/haoranchen9453/Github/cNMA/Software/results/profiler.pro
+Wed Sep 14 12:18:50 2016    /home/haoranchen9453/Github/Github_shen/cNMA/Manual/Example/Example3/Output/profiler.pro
 
-         34411431 function calls (34054495 primitive calls) in 135.576 seconds
+         33213078 function calls (32894292 primitive calls) in 140.627 seconds
 
    Ordered by: cumulative time
-   List reduced from 1080 to 15 due to restriction <15>
+   List reduced from 1096 to 15 due to restriction <15>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000  135.576  135.576 /home/haoranchen9453/Github/cNMA/Software/NMAUnified.py:825(mainCalculation)
-        1    0.000    0.000   69.418   69.418 /home/haoranchen9453/Github/cNMA/Software/NMAUnified.py:382(calculateMeasuresExpanding)
-        1    0.006    0.006   68.881   68.881 /home/haoranchen9453/Github/cNMA/Software/RMSDReducer.py:436(calcRMSDReductionsExpandingSet)
-       58    0.001    0.000   68.260    1.177 /home/haoranchen9453/Github/cNMA/Software/timeout.py:19(wrapper)
-       58    0.002    0.000   68.258    1.177 /home/haoranchen9453/Github/cNMA/Software/RMSDReducer.py:799(obtainLstSqBetasGeneralizedExpanding)
-       58    0.000    0.000   67.919    1.171 <string>:1(cg)
-       58    0.001    0.000   67.919    1.171 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/isolve/iterative.py:78(non_reentrant)
-       58    9.630    0.166   67.918    1.171 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/isolve/iterative.py:218(cg)
-   800705    5.271    0.000   58.269    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:189(matvec)
-   400381    1.148    0.000   45.573    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:177(_matvec)
-   400381    1.859    0.000   43.898    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:291(matmat)
-   400381    0.742    0.000   40.494    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:596(_matmat)
-   400381   39.752    0.000   39.752    0.000 {method 'dot' of 'numpy.ndarray' objects}
-        1    0.000    0.000   32.373   32.373 /home/haoranchen9453/Github/cNMA/Software/NMAUnified.py:313(setupNMA)
-        1    0.004    0.004   31.513   31.513 /home/haoranchen9453/Github/cNMA/Software/ANMs.py:144(calcANMsUnified)
+        1    0.000    0.000  140.627  140.627 /home/haoranchen9453/Github/Github_shen/cNMA/Software/NMAUnified.py:827(mainCalculation)
+        1    0.000    0.000   74.607   74.607 /home/haoranchen9453/Github/Github_shen/cNMA/Software/NMAUnified.py:382(calculateMeasuresExpanding)
+        1    0.004    0.004   74.088   74.088 /home/haoranchen9453/Github/Github_shen/cNMA/Software/RMSDReducer.py:436(calcRMSDReductionsExpandingSet)
+       58    0.001    0.000   73.744    1.271 /home/haoranchen9453/Github/Github_shen/cNMA/Software/timeout.py:19(wrapper)
+       58    0.002    0.000   73.743    1.271 /home/haoranchen9453/Github/Github_shen/cNMA/Software/RMSDReducer.py:799(obtainLstSqBetasGeneralizedExpanding)
+       58    0.000    0.000   73.585    1.269 <string>:1(cg)
+       58    0.001    0.000   73.585    1.269 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/isolve/iterative.py:78(non_reentrant)
+       58   10.123    0.175   73.584    1.269 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/isolve/iterative.py:218(cg)
+   840531    5.595    0.000   63.445    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:189(matvec)
+   420294    1.222    0.000   50.280    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:177(_matvec)
+   420294    1.971    0.000   48.514    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:291(matmat)
+   420294    0.788    0.000   44.943    0.000 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:596(_matmat)
+   420294   44.155    0.000   44.155    0.000 {method 'dot' of 'numpy.ndarray' objects}
+        1    0.000    0.000   34.134   34.134 /home/haoranchen9453/Github/Github_shen/cNMA/Software/NMAUnified.py:313(setupNMA)
+        1    0.004    0.004   33.388   33.388 /home/haoranchen9453/Github/Github_shen/cNMA/Software/ANMs.py:144(calcANMsUnified)
 
 

@@ -17,8 +17,8 @@ class Configurations(object):
 		
 		# Path to the output
 
-		# outputPath = os.path.dirname(__file__)
-		# self.outputPath = outputPath + "/"
+		outputPath = os.path.dirname(__file__)
+		self.outputPath = outputPath[:-5]
 		# os.environ['paramsPath'] = self.outputPath+'params.txt'
 		# index = os.popen("if [ -e $paramsPath ]; then d=true; else d=false; fi; echo -n $d").read()
 		# if index == 'true':
@@ -32,10 +32,10 @@ class Configurations(object):
 		# 	maxModesToCalculate = 400
 		# print index
 
-		self.outputPath ="$HOME/workspace/TNMA1/src/cnma Manual/configuration/example1/"
+		# self.outputPath = "~/Github/Github_shen/cNMA/Manual/Example/Example2/"
 
 		# Experiment name prefix to be used to create the results output folder
-		self.experimentNamePrefix = "results"
+		self.experimentNamePrefix = "Output"
 		
 		# NMAUnified investigationsOn on "Individual" or "Complex"
 		self.investigationsOn = "Individual"

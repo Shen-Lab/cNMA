@@ -1,25 +1,25 @@
-Wed Sep  7 19:18:38 2016    /home/haoranchen9453/Github/cNMA/Software/results/profiler.pro
+Wed Sep 14 12:14:52 2016    /home/haoranchen9453/Github/Github_shen/cNMA/Manual/Example/Example2/Output/profiler.pro
 
-         138570 function calls (137179 primitive calls) in 2.066 seconds
+         140081 function calls (138690 primitive calls) in 2.027 seconds
 
    Ordered by: cumulative time
-   List reduced from 581 to 15 due to restriction <15>
+   List reduced from 597 to 15 due to restriction <15>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.001    0.001    2.066    2.066 /home/haoranchen9453/Github/cNMA/Software/NMAUnified.py:825(mainCalculation)
-        1    0.001    0.001    1.017    1.017 /home/haoranchen9453/Github/cNMA/Software/ResultsPrinter.py:855(writeNMDResults)
-       16    0.870    0.054    0.870    0.054 {posix.system}
-        1    0.000    0.000    0.526    0.526 /home/haoranchen9453/Github/cNMA/Software/ANMs.py:592(_calcANMsUnified)
-        1    0.000    0.000    0.354    0.354 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:283(calcANM)
-        2    0.008    0.004    0.244    0.122 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/nmdfile.py:340(writeNMD)
-      806    0.214    0.000    0.214    0.000 {method 'tofile' of 'numpy.ndarray' objects}
-        1    0.000    0.000    0.206    0.206 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:180(calcModes)
-        1    0.192    0.192    0.205    0.205 /home/haoranchen9453/Github/cNMA/Software/RMSDPrediction.py:43(calculation)
-        1    0.202    0.202    0.203    0.203 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/linalg/decomp.py:206(eigh)
-        1    0.002    0.002    0.199    0.199 /home/haoranchen9453/Github/cNMA/Software/ResultsPrinter.py:353(writeDirectResults)
-        1    0.068    0.068    0.148    0.148 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:67(buildHessian)
-        1    0.018    0.018    0.109    0.109 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/editing.py:72(extendModel)
-        4    0.091    0.023    0.101    0.025 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/numpy/lib/npyio.py:967(savetxt)
-        1    0.000    0.000    0.101    0.101 /home/haoranchen9453/Github/cNMA/Software/Utils.py:227(parseFilteredPDB)
+        1    0.001    0.001    2.027    2.027 /home/haoranchen9453/Github/Github_shen/cNMA/Software/NMAUnified.py:827(mainCalculation)
+        1    0.001    0.001    1.011    1.011 /home/haoranchen9453/Github/Github_shen/cNMA/Software/ResultsPrinter.py:855(writeNMDResults)
+       16    0.848    0.053    0.848    0.053 {posix.system}
+        1    0.000    0.000    0.502    0.502 /home/haoranchen9453/Github/Github_shen/cNMA/Software/ANMs.py:592(_calcANMsUnified)
+        1    0.000    0.000    0.334    0.334 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:283(calcANM)
+        2    0.008    0.004    0.255    0.127 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/nmdfile.py:340(writeNMD)
+      806    0.227    0.000    0.227    0.000 {method 'tofile' of 'numpy.ndarray' objects}
+        1    0.191    0.191    0.203    0.203 /home/haoranchen9453/Github/Github_shen/cNMA/Software/RMSDPrediction.py:45(calculation)
+        1    0.000    0.000    0.199    0.199 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:180(calcModes)
+        1    0.196    0.196    0.197    0.197 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/scipy/linalg/decomp.py:206(eigh)
+        1    0.001    0.001    0.197    0.197 /home/haoranchen9453/Github/Github_shen/cNMA/Software/ResultsPrinter.py:353(writeDirectResults)
+        1    0.061    0.061    0.134    0.134 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:67(buildHessian)
+        1    0.017    0.017    0.108    0.108 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/prody/dynamics/editing.py:72(extendModel)
+        5    0.093    0.019    0.102    0.020 /home/haoranchen9453/anaconda2/lib/python2.7/site-packages/numpy/lib/npyio.py:967(savetxt)
+        1    0.000    0.000    0.094    0.094 /home/haoranchen9453/Github/Github_shen/cNMA/Software/Utils.py:227(parseFilteredPDB)
 
 
