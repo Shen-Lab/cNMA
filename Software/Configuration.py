@@ -69,7 +69,7 @@ class Configurations(object):
 		self.filterPDB = "protein"
 		
 		# What atoms are subject to the matching of chains (calpha, bb or all)
-		self.whatAtomsToMatch = "all"
+		self.whatAtomsToMatch = "calpha"
 		
 		# custom delta HR, if HC_U1, set self.customH to True, deprecated HR_A, HR_B: version A has bound structures in the second partial derivative terms, B only a penalty
 		self.customH = True

@@ -811,6 +811,13 @@ class NMAUnified(TNMABase):
 			encounter.resultsPrinter.setEigenvaluesReference(encounter.accessANMs().getANMReferenceSlc()[0].getEigvals())
 			encounter.resultsPrinter.setNumberOfModes(encounter.accessANMs().getANMReferenceSlc()[0].numModes())
 			encounter.resultsPrinter.setPathOfConfigFile(self.pathOfConfigFile)
+			if self.config.calculateZeroEigvalModes == True:
+				encounter.resultsPrinter.setZeroEigvecsProtein1(encounter.accessANMs()._anm_reference[0].getArray().T[:6])
+				encounter.resultsPrinter.setZeroEigvecsProtein2(encounter.accessANMs()._anm_counterpart[0].getArray().T[:6])
+				if self.config.whichCustomHC == "HC_0" or self.config.whichCustomHC == "HC_06":
+					encounter.resultsPrinter.setZeroEigvecsComplex(encounter.accessANMs()._anm_complex[0].getArray().T[:12])
+				else:
+					encounter.resultsPrinter.setZeroEigvecsComplex(encounter.accessANMs()._anm_complex[0].getArray().T[:6])
 			
 		# write the direct results 
 		if outputPath:
@@ -819,7 +826,7 @@ class NMAUnified(TNMABase):
 				outputPath = os.path.dirname(os.path.realpath(__file__))
 			outputPath = makeStringEndWith(outputPath, "/")
 			self.config.outputPath = outputPath     
-		resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+		resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, self.bound_provided)
 		encounter.resultsPrinter.writeNMDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, encounter.accessANMs(), storeANMs=False)
 		
 		return resultsPath
@@ -876,35 +883,38 @@ class NMAUnified(TNMABase):
 					outputPath = os.path.dirname(os.path.realpath(__file__))
 				outputPath = makeStringEndWith(outputPath, "/")
 				self.config.outputPath = outputPath          
-			resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+			resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, self.bound_provided)
 			encounter.resultsPrinter.writeNMDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, encounter.accessANMs(), storeANMs=False)
 			
 			outputTitle = encounter.getReference().getTitle()
 			RMSDprediction = RMSDPrediction(protein1_A)
 			RMSDPredicted = RMSDprediction.prediction(resultsPath, RMSDprediction.modelinput(), RMSDprediction.calculation(RMSDprediction.eigeninput(resultsPath), outputTitle))
-			encounter.resultsPrinter.setRMSDPrediction(RMSDPredicted)
-			encounter.resultsPrinter.writeRMSDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+			
 
-			# # sampling
-			# proteinFrom = encounter.getReference().select('calpha')
-  	# 		# proteinTo = encounter.getMobChain()
-  	# 		anmReferenceTemp = encounter.accessANMs().getANMReference()
-  	# 		anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
-  	# 		ensem = sampleModes(anmReference[0][7:10], proteinFrom, 10, 3)
-  	# 		RMSDtostart = []
-  	# 		RMSDtobound = []
-   # 			for sample_index in range (0, 10):
+			# sampling
+
+			proteinFrom = encounter.getReference()
+			anmReferenceTemp = encounter.accessANMs().getANMReference()
+  			anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
+  			ensem = sampleModes(anmReference[0][7:100], proteinFrom, 10, RMSDPredicted)
+  			# RMSDtostart = []
+  			# RMSDtobound = []
+  			# print type(proteinFrom)
+  			# print np.unique(proteinFrom.select('calpha').getIndices())
+  			ensem.setAtoms(proteinFrom)
+   # 			for sample_index in range (0, 100):
    # 				RMSDtostart.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinFrom))
    # 				if self.bound_provided == True:
- 		# 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinFrom))
-  	# 			# print "Conformer " + str(sample_index) + ": RMSD to bound ", calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo)
+ 		# 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo))
 			# proteinFromTemp = proteinFrom.copy()	
 			# proteinFromTemp.addCoordset(ensem)
+			encounter.resultsPrinter.setEnsemble(ensem)
+			# encounter.resultsPrinter.setRMSDtostart(RMSDtostart)
+			# encounter.resultsPrinter.setRMSDtobound(RMSDtobound)
 
-			# RMSDprediction = RMSDPrediction()
-			# RMSDPredicted = RMSDprediction.prediction(resultsPath, RMSDprediction.modelinput(), RMSDprediction.calculation(RMSDprediction.eigeninput(resultsPath), outputTitle))
-			# encounter.resultsPrinter.setRMSDPrediction(RMSDPredicted)
-			# encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+			encounter.resultsPrinter.setRMSDPrediction(RMSDPredicted)
+			encounter.resultsPrinter.writeRMSDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+			encounter.resultsPrinter.writeSampleResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
 
 
 			print "Results have been written to: ", resultsPath
@@ -989,39 +999,43 @@ class NMAUnified(TNMABase):
 			# output
 			resultsPath = self.outputResults(encounter, dataHolder, outputPath)
 
-			# # sampling
-			# if self.bound_provided == True:
-			# 	proteinFrom = encounter.getRefChain()
-			# 	proteinTo = encounter.getMobChain()
-			# else:
-			# 	proteinFrom = encounter.getReference()
+			outputTitle = encounter.getReference().getTitle()
+			RMSDprediction = RMSDPrediction(protein1_A, protein2_A)
+			RMSDPredicted = RMSDprediction.prediction(resultsPath, RMSDprediction.modelinput(), RMSDprediction.calculation(RMSDprediction.eigeninput(resultsPath), outputTitle))
+			
 
-  	# 		if self.bound_provided == True:
-  	# 			anmReference = encounter.accessANMs().getANMReferenceSlc()
-  	# 		else:
-  	# 			anmReference = encounter.accessANMs().getANMReference()
-  	# 		# anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
-  	# 		ensem = sampleModes(anmReference[0][7:100], proteinFrom, 100, 1.650920971079819)
-  	# 		RMSDtostart = []
-  	# 		RMSDtobound = []
-  	# 		# print type(proteinFrom)
-  	# 		# print np.unique(proteinFrom.select('calpha').getIndices())
-  	# 		# ensem.setAtoms(proteinFrom.select('calpha'))
+			# sampling
+			if self.bound_provided == True:
+				proteinFrom = encounter.getRefChain()
+				proteinTo = encounter.getMobChain()
+			else:
+				proteinFrom = encounter.getReference()
+
+  			if self.bound_provided == True:
+  				anmReferenceTemp = encounter.accessANMs().getANMReferenceSlc()
+  			else:
+  				anmReferenceTemp = encounter.accessANMs().getANMReference()
+
+  			anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
+  			ensem = sampleModes(anmReference[0][7:100], proteinFrom, 10, RMSDPredicted)
+  			# RMSDtostart = []
+  			# RMSDtobound = []
+  			# print type(proteinFrom)
+  			# print np.unique(proteinFrom.select('calpha').getIndices())
+  			ensem.setAtoms(proteinFrom)
    # 			for sample_index in range (0, 100):
    # 				RMSDtostart.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinFrom))
    # 				if self.bound_provided == True:
  		# 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo))
 			# proteinFromTemp = proteinFrom.copy()	
 			# proteinFromTemp.addCoordset(ensem)
-			# encounter.resultsPrinter.setEnsemble(ensem.getCoordsets())
+			encounter.resultsPrinter.setEnsemble(ensem)
 			# encounter.resultsPrinter.setRMSDtostart(RMSDtostart)
 			# encounter.resultsPrinter.setRMSDtobound(RMSDtobound)
 
-			outputTitle = encounter.getReference().getTitle()
-			RMSDprediction = RMSDPrediction(protein1_A, protein2_A)
-			RMSDPredicted = RMSDprediction.prediction(resultsPath, RMSDprediction.modelinput(), RMSDprediction.calculation(RMSDprediction.eigeninput(resultsPath), outputTitle))
 			encounter.resultsPrinter.setRMSDPrediction(RMSDPredicted)
 			encounter.resultsPrinter.writeRMSDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+			encounter.resultsPrinter.writeSampleResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
 
 
 			print "Results have been written to: ", resultsPath
