@@ -1,0 +1,1 @@
+python NMAUnified.py --outputPath ~/Documents/CAPRI6paper/data_extension/ Configuration.py ~/Documents/CAPRI6paper/data_extension/zdock_output/1a2y_AB/1a2y_r_u.pdb ~/Documents/CAPRI6paper/data_extension/zdock_output/1a2y_AB/1a2y_l_u_1.pdb ~/Documents/CAPRI6paper/data_extension/pdb_bound/1a2y_AB/1a2y_r_b.pdb ~/Documents/CAPRI6paper/data_extension/pdb_bound/1a2y_AB/1a2y_l_b.pdb
