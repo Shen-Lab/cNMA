@@ -2,12 +2,12 @@ Version 1.0 Sep 12 2016
 
 Version 1.1 Mar 29 2018
 Test environment:
-1. NumPy 1.14.0
-2. Anaconda 5.1.0
-3. Prody 1.9.4
-4. SciPy 1.19.0
+1. NumPy 1.8.0 -> 1.14.0
+2. Anaconda 4.1.1 -> 5.1.0
+3. Prody 1.5.1 -> 1.9.4
+4. SciPy 0.13.3 -> 1.19.0
 Update:
-1. Fix run time error due to different version of python: ANM.py line 2135, "if Mnormed == None" to "if Mnormed is None".
+1. Fix run time error due to Prody upgrade: ANM.py line 2135, "if Mnormed == None" to "if Mnormed is None".
 2. Fix error due to Scipy upgrade: RMSDPrediction.py line 64, "float" to "int".
 3. Fix error due to Scipy upgrade: RMSDPrediction.py redefine phi array as 2D array.
 4. Add conformational samples based on predicted RMSD and normal modes into Output file, see Manual for detail.
