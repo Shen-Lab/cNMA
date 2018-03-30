@@ -43,7 +43,7 @@ class Configurations(object):
 		self.investigationsOn = "Individual"
 		
 		# measures on "whole" if true, else on "interface"
-		self.measuresOnWhole = True
+		self.measuresOnWhole = False
 		
 		# calculate zero eigenvalue modes
 		self.calculateZeroEigvalModes = True

@@ -75,7 +75,7 @@ class Configurations(object):
 		# Cut-off distance D for intermolecular springs
 		self.customHRdistance = customHRdistance
 
-		# Force constant gamma for intermolecu- lar springs
+		# Force constant gamma for intermolecular springs
 		self.customForceConstant = customForceConstant
 
 		self.whichCustomHIndividual = "HC_subvector"

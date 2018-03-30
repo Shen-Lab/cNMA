@@ -2132,7 +2132,7 @@ class ANMs(object):
 			for element in M.T:
 				modeVector = Vector(element)
 				modeNormalized = modeVector.getNormed()
-				if Mnormed == None:
+				if Mnormed is None:
 					Mnormed = modeNormalized.getArray()
 				else:
 					Mnormed = np.column_stack((Mnormed, modeNormalized.getArray()))

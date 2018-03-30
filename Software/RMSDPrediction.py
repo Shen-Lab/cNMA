@@ -50,7 +50,7 @@ class RMSDPrediction(object):
 		summ = 0
 		
 
-		phi = np.zeros([8], float)
+		phi = np.zeros([1, 8], float)
 		eig_len = len(eigenvalues)
 		n = np.zeros([eig_len, 2], float)
 
@@ -65,7 +65,7 @@ class RMSDPrediction(object):
 
 		#rigidity cutoff
 		threshold = 250  #threshold range
-		rig_cutoff_index = np.zeros([threshold], float)
+		rig_cutoff_index = np.zeros([threshold], int)
 		count = 0
 		cut_index = np.zeros([threshold])
 		l_1 = eigenvalues[0]
@@ -95,8 +95,8 @@ class RMSDPrediction(object):
 
 		#absolute cutoff feature
 		ab_cutoff = 100
-		phi[0] = n[ab_cutoff, 1]
-		phi[3] = n[ab_cutoff, 0]
+		phi[0, 0] = n[ab_cutoff, 1]
+		phi[0, 3] = n[ab_cutoff, 0]
 
 		#size_related cutoff feature
 		percentage = 100
@@ -114,8 +114,8 @@ class RMSDPrediction(object):
 
 			# size-related cutoff feature (percentage varies)
 			if i == 60: #various
-				phi[1] = X_summ[i]
-				phi[4] = X_mult[i]
+				phi[0, 1] = X_summ[i]
+				phi[0, 4] = X_mult[i]
 
 
 		#rigidity_related cutoff feature
@@ -131,24 +131,25 @@ class RMSDPrediction(object):
 			X_summ = n[rig_cutoff_index[cutoff], 1]
 		pass
 
-		phi[2] = X_summ
-		phi[5] = X_mult
+		phi[0, 2] = X_summ
+		phi[0, 5] = X_mult
 
 		#size of Nres feature
-		phi[6] = size
+		phi[0, 6] = size
 
 		#group the features into three sets(phi_mult, phi_summ)
-		phi_mult = phi[3:7]
+		phi_mult = phi[:, 3:7]
 		# phi_summ = phi[0,1,2,6]
 		phi_mean = np.loadtxt(self.path + '10AA_phi_mult_mean.txt')
 		phi_std = np.loadtxt(self.path + '10AA_phi_mult_std.txt')
 		#standardize mult feature
-		for i in range(0, phi_mult.shape[0]):
-			phi_mult[i] = (phi_mult[i] - phi_mean[i]) / phi_std[i]
+		for i in range(0, phi_mult.shape[1]):
+			phi_mult[0, i] = (phi_mult[0, i] - phi_mean[i]) / phi_std[i]
 		return phi_mult
 
 	def prediction(self, path, params, feature_matrix):
 		RMSD_mean = np.loadtxt(self.path + '10AA_RMSD_mean.txt')
+		
 		RMSD_predited = params.predict(feature_matrix) + RMSD_mean
 
 		return RMSD_predited

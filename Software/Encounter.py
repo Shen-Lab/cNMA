@@ -101,6 +101,12 @@ class Encounter(object):
 		""" Calculate the matched interface atoms (subset of the ref_chain) of the reference structure. """
 		ref_chain_interface_indices = utils.getMatchingStructure(self.getMobChain(), self.getMobChainInterface(), self.getRefChain())
 		self._ref_chain_interface = utils.getSubsetOfSelection(self.getRefChain(), ref_chain_interface_indices)
+
+	# edited by Haoran Chen 20170709
+	def calcRefChainInterface2(self):
+		""" Calculate interface atoms of the reference structure without matched structure. """
+		interfaceReference = self.getReference().select('same residue as within 6 of inhibitor', inhibitor = self.getUnboundCounterpart())
+		self._ref_chain_interface = self.getRefChain().select(interfaceReference.getSelstr())
 		
 	def calcUnboundInterface(self, boundChain, boundChainInterface, unboundChain, utils):
 		""" Get the interface on the unbound protein chain when given the bound protein chain and the known interface there. 

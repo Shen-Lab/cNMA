@@ -336,8 +336,7 @@ class ResultsPrinter(object):
 		np.set_printoptions(threshold=np.nan)
 		utils.mkdir_p(basePath)
 		utils.mkdir_p(basePath+experimentName+"/")
-		print basePath
-		print basePath+experimentName
+
 
 		if not cCase: 
 			path = basePath+experimentName+"/"
@@ -356,8 +355,7 @@ class ResultsPrinter(object):
 		np.set_printoptions(threshold=np.nan)
 		utils.mkdir_p(basePath)
 		utils.mkdir_p(basePath+experimentName+"/")
-		print basePath
-		print basePath+experimentName
+
 
 		if not cCase: 
 			path = basePath+experimentName+"/"
