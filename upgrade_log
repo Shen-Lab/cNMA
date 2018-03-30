@@ -1,4 +1,5 @@
 Version 1.0 Sep 12 2016
+
 Version 1.1 Mar 29 2018
 Test environment:
 1. NumPy 1.14.0
@@ -10,4 +11,4 @@ Update:
 2. Fix error due to Scipy upgrade: RMSDPrediction.py line 64, "float" to "int".
 3. Fix error due to Scipy upgrade: RMSDPrediction.py redefine phi array as 2D array.
 4. Add conformational samples based on predicted RMSD and normal modes into Output file, see Manual for detail.
-5. Manual update.
+5. Several updates on Manual.
