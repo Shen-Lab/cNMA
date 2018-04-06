@@ -1,2 +1,0 @@
-# RMSD_unbound_to_superposed_bound
-1.111606026720601

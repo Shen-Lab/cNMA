@@ -10,15 +10,20 @@ from sklearn.externals import joblib
 class RMSDPrediction(object):
 
 
-	def __init__(self,protein1_A, protein2_A=None):
+	def __init__(self, protein1_A, protein2_A, investigationsOn):
 		'''
 		Constructor
 		'''
-		self.path = os.path.dirname(__file__) + "/"
+		self.investigationsOn = investigationsOn
+		if investigationsOn == "Individual":
+			self.path = os.path.dirname(__file__) + "/10AA_individual/"
+		if investigationsOn == "Complex":
+			self.path = os.path.dirname(__file__) + "/10AA_complex/"
 		os.environ['paramsPath'] = self.path+'params.txt'
 		#self.index = os.popen("if [ -e $paramsPath ]; then d=true; else d=false; fi; echo -n $d").read()
 		self.index = os.path.exists("$paramsPath")
 		self.protein1_A = protein1_A
+		self.protein2_A = protein2_A
 		# print paramsPath
 		# print self.index
 
@@ -32,15 +37,19 @@ class RMSDPrediction(object):
 			filename = self.params[3] + '.joblib.pkl'
 		elif self.index == False:
 			filename = 'KRR.joblib.pkl'
-		ModelParameters = joblib.load(self.path + filename)
+		ModelParameters = joblib.load(self.path + "model/" + filename)
 		return ModelParameters
 
 	def eigeninput(self, path):
 		'''
 		Input eigenvalues file
 		'''
-		filename = pd.read_csv(path + 'eigenvaluesReference.txt')
-		eigenvalues = filename.values
+		if self.investigationsOn == "Individual":
+			filename = pd.read_csv(path + 'eigenvaluesReference.txt')
+			eigenvalues = filename.values
+		if self.investigationsOn == "Complex":
+			filename = pd.read_csv(path + 'eigenvaluesComplex.txt')
+			eigenvalues = filename.values[6:]
 		return eigenvalues
 
 	def calculation(self, eigenvalues, title):
@@ -56,10 +65,22 @@ class RMSDPrediction(object):
 		n = np.zeros([eig_len, 2], float)
 
 		#read size
+		if self.investigationsOn == "Individual":
+			os.environ['pdbPath'] = self.protein1_A
+			os.system("grep ' CA ' $pdbPath | wc -l > Nres.txt")
+			size = np.loadtxt("Nres.txt")
+			os.system("rm Nres.txt")
+		if self.investigationsOn == "Complex":
+			os.environ['pdbAPath'] = self.protein1_A
+			os.environ['pdbBPath'] = self.protein2_A
+			os.system("grep ' CA ' $pdbAPath | wc -l > r_Nres.txt")
+			os.system("grep ' CA ' $pdbBPath | wc -l > l_Nres.txt")
+			size_r = np.loadtxt("r_Nres.txt")
+			size_l = np.loadtxt("l_Nres.txt")
+			os.system("rm r_Nres.txt")
+			os.system("rm l_Nres.txt")
+			size = size_r + size_l
 
-		os.environ['pdbPath'] = self.protein1_A
-		os.system("grep ' CA ' $pdbPath | wc -l > Nres.txt")
-		size = np.loadtxt(self.path + "Nres.txt")
 
 		#size cutoff
 		size_cutoff_index = np.zeros([100], int)
@@ -141,16 +162,16 @@ class RMSDPrediction(object):
 		#group the features into three sets(phi_mult, phi_summ)
 		phi_mult = phi[:, 3:7]
 		# phi_summ = phi[0,1,2,6]
-		phi_mean = np.loadtxt(self.path + '10AA_phi_mult_mean.txt')
-		phi_std = np.loadtxt(self.path + '10AA_phi_mult_std.txt')
+		phi_mean = np.loadtxt(self.path + 'data/10AA_phi_mult_mean.txt')
+		phi_std = np.loadtxt(self.path + 'data/10AA_phi_mult_std.txt')
 		#standardize mult feature
 		for i in range(0, phi_mult.shape[1]):
 			phi_mult[0, i] = (phi_mult[0, i] - phi_mean[i]) / phi_std[i]
 		return phi_mult
 
 	def prediction(self, path, params, feature_matrix):
-		RMSD_mean = np.loadtxt(self.path + '10AA_RMSD_mean.txt')
-		
+		RMSD_mean = np.loadtxt(self.path + 'data/10AA_RMSD_mean.txt')
+		params
 		RMSD_predited = params.predict(feature_matrix) + RMSD_mean
 
 		return RMSD_predited

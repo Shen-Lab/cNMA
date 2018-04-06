@@ -7,3 +7,10 @@ Oliwa, T. and Shen, Y. (2015). cNMA: a framework of encounter complex-based norm
 
 Chen, H., Sun, Y., and Shen, Y. Predicting protein conformational changes for unbound and homology docking: Learning from intrinsic and induced flexibility.  Proteins: Structure, Function, and Bioinformatics, epub ahead of print, 10.1002/prot.25212 
 
+
+
+Version 1.0.0 Sep. 12 2016
+
+Version 1.1.0 Mar. 29 2018
+
+Version 1.1.1 Apr. 5 2018

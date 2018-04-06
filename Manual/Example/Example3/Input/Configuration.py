@@ -37,13 +37,13 @@ class Configurations(object):
 		maxModesToCalculate = 400
 
 		# Experiment name prefix to be used to create the results output folder
-		self.experimentNamePrefix = "Result"
+		self.experimentNamePrefix = "Output"
 		
 		# NMAUnified investigationsOn on "Individual" or "Complex"
 		self.investigationsOn = "Individual"
 		
 		# measures on "whole" if true, else on "interface"
-		self.measuresOnWhole = False
+		self.measuresOnWhole = True
 		
 		# calculate zero eigenvalue modes
 		self.calculateZeroEigvalModes = True

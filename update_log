@@ -1,0 +1,31 @@
+# cNMA
+Encounter Complex-based Normal Mode Analysis for Proteins
+
+Please cite: 
+
+Oliwa, T. and Shen, Y. (2015). cNMA: a framework of encounter complex-based normal mode analysis to model conformational changes in protein interactions. Bioinformatics, 31(12), i151-i160.
+
+Chen, H., Sun, Y., and Shen, Y. Predicting protein conformational changes for unbound and homology docking: Learning from intrinsic and induced flexibility.  Proteins: Structure, Function, and Bioinformatics, epub ahead of print, 10.1002/prot.25212 
+
+
+
+Version 1.0.0 Sep. 12 2016
+
+Version 1.1.0 Mar. 29 2018
+Test environment:
+1. NumPy 1.8.0 -> 1.14.0
+2. Anaconda 4.1.1 -> 5.1.0
+3. Prody 1.5.1 -> 1.9.4
+4. SciPy 0.13.3 -> 1.19.0
+Update:
+1. Fixed run time error due to Prody upgrade: ANM.py line 2135, "if Mnormed == None" to "if Mnormed is None".
+2. Fixed error due to Scipy upgrade: RMSDPrediction.py line 64, "float" to "int".
+3. Fixed error due to Scipy upgrade: RMSDPrediction.py redefine phi array as 2D array.
+4. Added conformational samples based on predicted RMSD and normal modes into Output file, see Manual for detail.
+5. Several updates on Manual.
+
+Version 1.1.1 Apr. 5 2018
+Update:
+1. Fixed bug on generating complex conformational samples due to package update.
+2. Added Example4 for complex conformational samples by adding complex version in NMAUnified and also trained complex model.
+3. Removeed false error/warning messages by updating ResultsPrinter.py.

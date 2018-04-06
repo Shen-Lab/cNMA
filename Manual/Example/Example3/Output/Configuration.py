@@ -19,6 +19,9 @@ class Configurations(object):
 
 		outputPath = os.path.dirname(__file__)
 		self.outputPath = outputPath[:-5]
+		# self.outputPath = "~/Github/Github_shen/cNMA/Manual/Example/Example1/"
+
+				
 		# os.environ['paramsPath'] = self.outputPath+'params.txt'
 		# index = os.popen("if [ -e $paramsPath ]; then d=true; else d=false; fi; echo -n $d").read()
 		# if index == 'true':
@@ -27,12 +30,11 @@ class Configurations(object):
 		# 	customForceConstant = float(params[1])
 		# 	maxModesToCalculate = int(params[2])
 		# elif index == 'false':
-		# 	customHRdistance = 12.0
-		# 	customForceConstant = 0.25
-		# 	maxModesToCalculate = 400
-		# print index
 
-		# self.outputPath = "~/Github/Github_shen/cNMA/Manual/Example/Example3/"
+		# Key parameters
+		customHRdistance = 12.0
+		customForceConstant = 0.25
+		maxModesToCalculate = 400
 
 		# Experiment name prefix to be used to create the results output folder
 		self.experimentNamePrefix = "Output"
@@ -70,10 +72,10 @@ class Configurations(object):
 		# self.whichCustomHIndividual = "HC_subvector"
 
 		# Cut-off distance D for intermolecular springs
-		self.customHRdistance = 12.0
+		self.customHRdistance = customHRdistance
 
 		# Force constant gamma for intermolecu- lar springs
-		self.customForceConstant = 0.25
+		self.customForceConstant = customForceConstant
 
 		self.whichCustomHIndividual = "HC_subvector"
 		
@@ -102,7 +104,7 @@ class Configurations(object):
 		
 		# Upper limit for mode calculation, set to very high number (1000000) to calculate 3n-6 modes
 		# self.maxModesToCalculate = maxModesToCalculate
-		self.maxModesToCalculate = 400
+		self.maxModesToCalculate = maxModesToCalculate
 		
 		# Precision for RMSD beta fitting
 		self.precisionBetaFitting = 1e-6

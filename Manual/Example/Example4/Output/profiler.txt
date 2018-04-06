@@ -1,0 +1,25 @@
+Fri Apr  6 13:54:48 2018    /home/hrchen/Github/Github_public/cNMA/Manual/Example/Example4/Output/profiler.pro
+
+         11439522 function calls (11403325 primitive calls) in 34.250 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1116 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   34.250   34.250 /home/hrchen/Github/Github_public/cNMA/Software/NMAUnified.py:854(mainCalculation)
+        1    0.004    0.004   27.109   27.109 /home/hrchen/Github/Github_public/cNMA/Software/NMAUnified.py:313(setupNMA)
+        1    0.011    0.011   27.104   27.104 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:144(calcANMsUnified)
+    42486    0.560    0.000   17.953    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/pointer.py:46(__eq__)
+        2    0.010    0.005   17.728    8.864 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:1360(calcCustomH_ANew)
+    42511    0.789    0.000   16.178    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:266(__eq__)
+      167    0.106    0.001   15.039    0.090 /home/hrchen/Github/Github_public/cNMA/Software/Utils.py:374(getMatchingStructureSelections)
+    42534    0.499    0.000   14.475    0.000 {all}
+   679783    6.629    0.000   13.976    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:273(<genexpr>)
+   722269    1.750    0.000    7.206    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/numpy/core/fromnumeric.py:2021(all)
+      111    0.032    0.000    6.383    0.058 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:2098(getCalphaPosition)
+        1    0.006    0.006    4.421    4.421 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:1465(calcCustomH_ANew_IJ)
+   725866    1.042    0.000    3.930    0.000 {method 'all' of 'numpy.ndarray' objects}
+        1    0.000    0.000    3.152    3.152 /home/hrchen/Github/Github_public/cNMA/Software/NMAUnified.py:719(outputResults)
+        3    0.000    0.000    2.987    0.996 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:591(_calcANMsUnified)
+
+

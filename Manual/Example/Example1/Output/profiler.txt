@@ -1,25 +1,25 @@
-Thu Mar 29 21:53:35 2018    /home/hrchen/Github/Github_public/cNMA/Manual/Example/Example1/Result/profiler.pro
+Fri Apr  6 14:04:06 2018    /home/hrchen/Github/Github_public/cNMA/Manual/Example/Example1/Output/profiler.pro
 
-         10548701 function calls (10512022 primitive calls) in 27.261 seconds
+         10727093 function calls (10690420 primitive calls) in 28.900 seconds
 
    Ordered by: cumulative time
-   List reduced from 1126 to 15 due to restriction <15>
+   List reduced from 1117 to 15 due to restriction <15>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000   27.261   27.261 /home/hrchen/Github/Github_public/cNMA/Software/NMAUnified.py:835(mainCalculation)
-        1    0.000    0.000   23.715   23.715 /home/hrchen/Github/Github_public/cNMA/Software/NMAUnified.py:313(setupNMA)
-        1    0.010    0.010   23.406   23.406 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:144(calcANMsUnified)
-        2    0.010    0.005   16.757    8.379 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:1358(calcCustomH_ANew)
-    42487    0.546    0.000   16.530    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/pointer.py:46(__eq__)
-    42516    0.764    0.000   14.800    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:266(__eq__)
-      167    0.103    0.001   14.000    0.084 /home/hrchen/Github/Github_public/cNMA/Software/Utils.py:374(getMatchingStructureSelections)
-    42535    0.455    0.000   13.147    0.000 {all}
-   616538    6.246    0.000   12.691    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:273(<genexpr>)
-   659824    1.559    0.000    6.389    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/numpy/core/fromnumeric.py:2021(all)
-      111    0.033    0.000    5.992    0.054 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:2096(getCalphaPosition)
-        1    0.005    0.005    3.964    3.964 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:1463(calcCustomH_ANew_IJ)
-   663421    0.955    0.000    3.432    0.000 {method 'all' of 'numpy.ndarray' objects}
-     2373    0.330    0.000    2.967    0.001 {zip}
-   524938    0.934    0.000    2.956    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/subset.py:109(iterAtoms)
+        1    0.000    0.000   28.901   28.901 /home/hrchen/Github/Github_public/cNMA/Software/NMAUnified.py:854(mainCalculation)
+        1    0.000    0.000   24.403   24.403 /home/hrchen/Github/Github_public/cNMA/Software/NMAUnified.py:313(setupNMA)
+        1    0.011    0.011   24.085   24.085 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:144(calcANMsUnified)
+        2    0.010    0.005   16.934    8.467 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:1360(calcCustomH_ANew)
+    42487    0.558    0.000   16.750    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/pointer.py:46(__eq__)
+    42516    0.783    0.000   14.989    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:266(__eq__)
+      167    0.104    0.001   14.177    0.085 /home/hrchen/Github/Github_public/cNMA/Software/Utils.py:374(getMatchingStructureSelections)
+    42535    0.456    0.000   13.301    0.000 {all}
+   616538    6.303    0.000   12.845    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:273(<genexpr>)
+   659824    1.607    0.000    6.510    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/numpy/core/fromnumeric.py:2021(all)
+      111    0.032    0.000    6.038    0.054 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:2098(getCalphaPosition)
+        1    0.006    0.006    4.010    4.010 /home/hrchen/Github/Github_public/cNMA/Software/ANMs.py:1465(calcCustomH_ANew_IJ)
+   663421    0.961    0.000    3.508    0.000 {method 'all' of 'numpy.ndarray' objects}
+     2373    0.332    0.000    2.962    0.001 {zip}
+   524938    0.944    0.000    2.956    0.000 /home/hrchen/anaconda2/lib/python2.7/site-packages/prody/atomic/subset.py:109(iterAtoms)
 
 

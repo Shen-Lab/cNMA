@@ -155,8 +155,7 @@ class ANMs(object):
 			else:
 				self._anm_reference, self._anm_reference_slc = self._calcANMsUnified(reference, numberOfModes, selstr, whatAtomsToMatch)
 
-			self._anm_counterpart = calcANM(counterpart, selstr=selstr)
-
+			self._anm_counterpart = calcANM(counterpart, n_modes = numberOfModes, selstr = selstr, zeros = True)
 			if chain_complex != None:
 				self._anm_complex, self._anm_complex_slc = self._calcANMsUnified(proteinComplex, numberOfModesComplex, selstr, whatAtomsToMatch, chain_complex)
 			else:
@@ -659,7 +658,7 @@ class ANMs(object):
 			self._anm_reference_slc = sliceModel(anm_reference_extend[0], anm_reference_extend[1], 'calpha')
 		self._anm_reference_slc = self.getNormalizedANM(self._anm_reference_slc)
 		
-	def replaceComplexANMs(self, anm_new, proteinComplex, complex_chain):
+	def replaceComplexANMs(self, anm_new, proteinComplex, complex_chain = None):
 		""" Replace the anm of the complex with anm_new and normalize along the way. 
 		
 		Args:
@@ -674,7 +673,10 @@ class ANMs(object):
 		# Extend the self.self._anm_complex_tilde on all atoms
 		anm_complex_extend = extendModel(self._anm_complex[0], self._anm_complex[1], proteinComplex, norm=True)        
 		# Then slice the anm_reference to the matched
-		self._anm_complex_slc = sliceModel(anm_complex_extend[0], anm_complex_extend[1], complex_chain.getSelstr())
+		if complex_chain != None:
+			self._anm_complex_slc = sliceModel(anm_complex_extend[0], anm_complex_extend[1], complex_chain.getSelstr())
+		else:
+			self._anm_complex_slc = sliceModel(anm_complex_extend[0], anm_complex_extend[1], complex_chain.getSelstr())			
 		self._anm_complex_slc = self.getNormalizedANM(self._anm_complex_slc)        
 		
 	def calcANMSlcInterface(self, ref_chain_interface, reference, titleOfReferenceSingleProtein, isBoundComplex=False):

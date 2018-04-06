@@ -339,7 +339,7 @@ class NMAUnified(TNMABase):
 												 maxModes,
 												 encounter,
 												 selstr='calpha', 
-												 whatAtomsToMatch=self.config.whatAtomsToMatch)				
+												 whatAtomsToMatch=self.config.whatAtomsToMatch)	
 			# Mode classifier, rescale eigenvalues based on complex eigenvalues
 			if self.config.rescaleEigenvalues:
 				modeClassifier = ModeClassifier(self.utils)
@@ -354,28 +354,39 @@ class NMAUnified(TNMABase):
 			assert self.config.whichCustomHC == "HC_0" or self.config.whichCustomHC == "HC_U1" or self.utils.config.whichCustomHC == "HC_06" or self.utils.config.whichCustomHC == "HC_U1_1k1k"
 
 			maxModes = min((encounter.getReference().select('calpha').numAtoms()*3 -6), (encounter.getUnboundCounterpart().select('calpha').numAtoms()*3 -6), self.config.maxModesToCalculate)
-
-			encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
-											 encounter.getUnboundCounterpart(), 
-											 encounter.unboundComplexAligned.complex,
-											 encounter.getRefChain(),
-											 encounter.getUnboundCounterpartChain(), 
-											 encounter.getUnboundComplexAlignedChain(),
-											 maxModes,
-											 encounter,
-											 selstr='calpha', 
-											 whatAtomsToMatch=self.config.whatAtomsToMatch)
+			if self.bound_provided == True:
+				encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
+												 encounter.getUnboundCounterpart(), 
+												 encounter.unboundComplexAligned.complex,
+												 maxModes,
+												 encounter,
+												 encounter.getRefChain(),
+												 encounter.getUnboundCounterpartChain(), 
+												 encounter.getUnboundComplexAlignedChain(),
+												 selstr='calpha', 
+												 whatAtomsToMatch=self.config.whatAtomsToMatch)
+			else:
+				encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
+												 encounter.getUnboundCounterpart(), 
+												 encounter.unboundComplexAligned.complex,
+												 maxModes,
+												 encounter,
+												 selstr='calpha', 
+												 whatAtomsToMatch=self.config.whatAtomsToMatch)				
 			
-			# Mode classifier, rescale eigenvalues 
-			if self.config.rescaleEigenvalues:     
-				print "re-ranking eigenvalues of HC"       
-				modeClassifier = ModeClassifier(self.utils)
-				anm_complex_rescaledEigenvals, indicesOfLambdaRSorting = modeClassifier.getRescaledComplexANM(encounter.accessANMs().getANMComplex(), encounter.getUnboundCounterpart())          
-				# replace the complex ANM
-				encounter.accessANMs().replace
-				ComplexANMs(anm_complex_rescaledEigenvals, encounter.unboundComplexAligned.complex, encounter.getUnboundComplexAlignedChain())
-				# put indices in the dataHolder
-				dataHolder.indicesOfLambdaRSorting = indicesOfLambdaRSorting
+			# # Mode classifier, rescale eigenvalues 
+			# if self.config.rescaleEigenvalues:     
+			# 	print "re-ranking eigenvalues of HC"       
+			# 	modeClassifier = ModeClassifier(self.utils)
+			# 	anm_complex_rescaledEigenvals, indicesOfLambdaRSorting = modeClassifier.getRescaledComplexANM(encounter.accessANMs().getANMComplex(), encounter.getUnboundCounterpart())          
+			# 	# replace the complex ANM
+			# 	if self.bound_provided == True:
+			# 		encounter.accessANMs().replaceComplexANMs(anm_complex_rescaledEigenvals, encounter.unboundComplexAligned.complex, encounter.getUnboundComplexAlignedChain())
+			# 	else:
+			# 		encounter.accessANMs().replaceComplexANMs(anm_complex_rescaledEigenvals, encounter.unboundComplexAligned.complex)
+
+			# 	# put indices in the dataHolder
+			# 	dataHolder.indicesOfLambdaRSorting = indicesOfLambdaRSorting
 			
 		return dataHolder
 	
@@ -740,11 +751,14 @@ class NMAUnified(TNMABase):
 				encounter.resultsPrinter.setOverlapTApproxInterface(dataHolder.overlapTApproxInterface)
 				encounter.resultsPrinter.setStepPointsReductionInterface(dataHolder.stepPointsReductionInterface)
 				encounter.resultsPrinter.setRMSD_interface(dataHolder.RMSD_interface)
-			encounter.resultsPrinter.setEigenvaluesComplex(encounter.accessANMs().getANMComplexSlc()[0].getEigvals())
-			encounter.resultsPrinter.setEigenvaluesReference(encounter.accessANMs().getANMReferenceSlc()[0].getEigvals())
+			if self.config.investigationsOn == "Individual":
+				encounter.resultsPrinter.setEigenvectorsReference(encounter.accessANMs().getANMReference()[0].getArray().T)			
+				encounter.resultsPrinter.setEigenvaluesReference(encounter.accessANMs().getANMReferenceSlc()[0].getEigvals())
+			if self.config.investigationsOn == "Complex":
+				encounter.resultsPrinter.setEigenvaluesComplex(encounter.accessANMs().getANMComplexSlc()[0].getEigvals())
+				encounter.resultsPrinter.setEigenvectorsComplex(encounter.accessANMs().getANMComplexSlc()[0].getArray().T)
 
-			# eigenvectors output
-			encounter.resultsPrinter.setEigenvectorsReference(encounter.accessANMs().getANMReference()[0].getArray().T)
+				# eigenvectors output
 			
 			# encounter.resultsPrinter.setEigenvaluesReceptor1k(encounter.accessANMs()._anm_reference_slc[0].getEigvals())
 
@@ -808,8 +822,13 @@ class NMAUnified(TNMABase):
 			except Exception:
 				pass
 		else:
-			encounter.resultsPrinter.setEigenvectorsReference(encounter.accessANMs().getANMReference()[0].getArray().T)
-			encounter.resultsPrinter.setEigenvaluesReference(encounter.accessANMs().getANMReferenceSlc()[0].getEigvals())
+			if self.config.investigationsOn == "Individual":
+				encounter.resultsPrinter.setEigenvectorsReference(encounter.accessANMs().getANMReference()[0].getArray().T)
+				encounter.resultsPrinter.setEigenvaluesReference(encounter.accessANMs().getANMReferenceSlc()[0].getEigvals())
+			if self.config.investigationsOn == "Complex":
+				encounter.resultsPrinter.setEigenvectorsComplex(encounter.accessANMs().getANMComplexSlc()[0].getArray().T)
+				encounter.resultsPrinter.setEigenvaluesComplex(encounter.accessANMs().getANMComplexSlc()[0].getEigvals())
+
 			encounter.resultsPrinter.setNumberOfModes(encounter.accessANMs().getANMReferenceSlc()[0].numModes())
 			encounter.resultsPrinter.setPathOfConfigFile(self.pathOfConfigFile)
 			if self.config.calculateZeroEigvalModes == True:
@@ -827,8 +846,8 @@ class NMAUnified(TNMABase):
 				outputPath = os.path.dirname(os.path.realpath(__file__))
 			outputPath = makeStringEndWith(outputPath, "/")
 			self.config.outputPath = outputPath     
-		resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, self.bound_provided)
-		encounter.resultsPrinter.writeNMDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, encounter.accessANMs(), storeANMs=False)
+		resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, self.bound_provided, self.config.investigationsOn)
+		encounter.resultsPrinter.writeNMDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, encounter.accessANMs(), single = False, storeANMs=False)
 		
 		return resultsPath
 		
@@ -884,38 +903,38 @@ class NMAUnified(TNMABase):
 					outputPath = os.path.dirname(os.path.realpath(__file__))
 				outputPath = makeStringEndWith(outputPath, "/")
 				self.config.outputPath = outputPath          
-			resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, self.bound_provided)
-			encounter.resultsPrinter.writeNMDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, encounter.accessANMs(), storeANMs=False)
+			resultsPath = encounter.resultsPrinter.writeDirectResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, self.bound_provided, self.config.investigationsOn)
+			encounter.resultsPrinter.writeNMDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils, encounter.accessANMs(), single = True, storeANMs=False)
 			
 			outputTitle = encounter.getReference().getTitle()
-			RMSDprediction = RMSDPrediction(protein1_A)
-			RMSDPredicted = RMSDprediction.prediction(resultsPath, RMSDprediction.modelinput(), RMSDprediction.calculation(RMSDprediction.eigeninput(resultsPath), outputTitle))
+		# 	RMSDprediction = RMSDPrediction(protein1_A)
+		# 	RMSDPredicted = RMSDprediction.prediction(resultsPath, RMSDprediction.modelinput(), RMSDprediction.calculation(RMSDprediction.eigeninput(resultsPath), outputTitle))
 			
 
-			# sampling
+		# 	# sampling
 
-			proteinFrom = encounter.getReference()
-			anmReferenceTemp = encounter.accessANMs().getANMReference()
-  			anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
-  			ensem = sampleModes(anmReference[0][6:107], proteinFrom, 100, RMSDPredicted)
-  			# RMSDtostart = []
-  			# RMSDtobound = []
-  			# print type(proteinFrom)
-  			# print np.unique(proteinFrom.select('calpha').getIndices())
-  			ensem.setAtoms(proteinFrom)
-   # 			for sample_index in range (0, 100):
-   # 				RMSDtostart.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinFrom))
-   # 				if self.bound_provided == True:
- 		# 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo))
-			# proteinFromTemp = proteinFrom.copy()	
-			# proteinFromTemp.addCoordset(ensem)
-			encounter.resultsPrinter.setEnsemble(ensem)
-			# encounter.resultsPrinter.setRMSDtostart(RMSDtostart)
-			# encounter.resultsPrinter.setRMSDtobound(RMSDtobound)
+		# 	proteinFrom = encounter.getReference()
+		# 	anmReferenceTemp = encounter.accessANMs().getANMReference()
+		# 	anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
+		# 	ensem = sampleModes(anmReference[0][6:107], proteinFrom, 100, RMSDPredicted)
+		# 	# RMSDtostart = []
+		# 	# RMSDtobound = []
+		# 	# print type(proteinFrom)
+		# 	# print np.unique(proteinFrom.select('calpha').getIndices())
+		# 	ensem.setAtoms(proteinFrom)
+  #  # 			for sample_index in range (0, 100):
+  #  # 				RMSDtostart.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinFrom))
+  #  # 				if self.bound_provided == True:
+		# # 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo))
+		# 	# proteinFromTemp = proteinFrom.copy()	
+		# 	# proteinFromTemp.addCoordset(ensem)
+		# 	encounter.resultsPrinter.setEnsemble(ensem)
+		# 	# encounter.resultsPrinter.setRMSDtostart(RMSDtostart)
+		# 	# encounter.resultsPrinter.setRMSDtobound(RMSDtobound)
 
-			encounter.resultsPrinter.setRMSDPrediction(RMSDPredicted)
-			encounter.resultsPrinter.writeRMSDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
-			encounter.resultsPrinter.writeSampleResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+		# 	encounter.resultsPrinter.setRMSDPrediction(RMSDPredicted)
+		# 	encounter.resultsPrinter.writeRMSDResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
+		# 	encounter.resultsPrinter.writeSampleResults(self.config.outputPath, self.config.experimentNamePrefix, self.utils)
 
 
 			print "Results have been written to: ", resultsPath
@@ -994,40 +1013,44 @@ class NMAUnified(TNMABase):
 																	 encounter.accessANMs()._anm_boundcomplex_slc_interface)                      
 				# data collection I-rms, L-rms
 				dataHolder = self.calculateMeasuresDistance(encounter, dataHolder)
+				if self.config.investigationsOn == "Complex":
+					encounter.resultsPrinter.setC_RMSD_unbound_to_superposed_bound(calcRMSD(encounter.getUnboundComplexAlignedChain(), encounter.getBoundComplexChain()))
+					encounter.resultsPrinter.writeComplexRMSD(self.config.outputPath, self.config.experimentNamePrefix, self.utils, self.bound_provided)
 			
 
 		
 			# output
 			resultsPath = self.outputResults(encounter, dataHolder, outputPath)
-
 			outputTitle = encounter.getReference().getTitle()
-			RMSDprediction = RMSDPrediction(protein1_A, protein2_A)
+			RMSDprediction = RMSDPrediction(protein1_A, protein2_A, self.config.investigationsOn)
 			RMSDPredicted = RMSDprediction.prediction(resultsPath, RMSDprediction.modelinput(), RMSDprediction.calculation(RMSDprediction.eigeninput(resultsPath), outputTitle))
 			
 
 			# sampling
-			if self.bound_provided == True:
-				proteinFrom = encounter.getRefChain()
-				proteinTo = encounter.getMobChain()
-			else:
+			if self.config.investigationsOn == "Individual":
 				proteinFrom = encounter.getReference()
+				anmReferenceTemp = encounter.accessANMs().getANMReference()
+				anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
 
-  			if self.bound_provided == True:
-  				anmReferenceTemp = encounter.accessANMs().getANMReferenceSlc()
-  			else:
-  				anmReferenceTemp = encounter.accessANMs().getANMReference()
+				ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
+			
+			if self.config.investigationsOn == "Complex":
 
-  			anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
-  			ensem = sampleModes(anmReference[0][6:107], proteinFrom, 10, RMSDPredicted)
-  			# RMSDtostart = []
-  			# RMSDtobound = []
-  			# print type(proteinFrom)
-  			# print np.unique(proteinFrom.select('calpha').getIndices())
-  			ensem.setAtoms(proteinFrom)
+				proteinFrom = encounter.unboundComplexAligned.complex
+				anmReferenceTemp = encounter.accessANMs().getANMComplexSlc()
+				anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
+				ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
+
+
+			# RMSDtostart = []
+			# RMSDtobound = []
+			# print type(proteinFrom)
+			# print np.unique(proteinFrom.select('calpha').getIndices())
+			ensem.setAtoms(proteinFrom)
    # 			for sample_index in range (0, 100):
    # 				RMSDtostart.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinFrom))
    # 				if self.bound_provided == True:
- 		# 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo))
+		# 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo))
 			# proteinFromTemp = proteinFrom.copy()	
 			# proteinFromTemp.addCoordset(ensem)
 			encounter.resultsPrinter.setEnsemble(ensem)

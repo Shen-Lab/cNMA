@@ -38,7 +38,7 @@ class Configurations(object):
 
 
 		# Experiment name prefix to be used to create the results output folder
-		self.experimentNamePrefix = "Result"
+		self.experimentNamePrefix = "Output"
 		
 		# NMAUnified investigationsOn on "Individual" or "Complex"
 		self.investigationsOn = "Individual"

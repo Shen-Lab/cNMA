@@ -129,7 +129,11 @@ class ResultsPrinter(object):
 	def setRMSD_unbound_to_superposed_bound(self, RMSD_unbound_to_superposed_bound):
 		""" Initial RMSD from the unbound to bound conformation of the protein. """
 		self.RMSD_unbound_to_superposed_bound = RMSD_unbound_to_superposed_bound
-		
+
+	def setC_RMSD_unbound_to_superposed_bound(self, C_RMSD_unbound_to_superposed_bound):
+		""" Initial RMSD from the unbound to bound conformation of the protein. """
+		self.C_RMSD_unbound_to_superposed_bound = C_RMSD_unbound_to_superposed_bound
+
 	def setRMSD_interface(self, RMSD_interface):
 		""" Initial RMSD from the unbound to bound conformation of the interface. """
 		self.RMSD_interface = RMSD_interface
@@ -177,6 +181,10 @@ class ResultsPrinter(object):
 	def setEigenvectorsReference(self, eigenvectorsReference):
 		""" The corresponding eigenvectors of the reference ANM. """
 		self.eigenvectorsReference = eigenvectorsReference
+
+	def setEigenvectorsComplex(self, eigenvectorsComplex):
+		""" The corresponding eigenvectors of the reference ANM. """
+		self.eigenvectorsComplex = eigenvectorsComplex
 	
 	def setEigenvaluesComplex2k(self, eigenvaluesComplex2k):
 		""" The corresponding eigenvaluesComplex2k of the ANM. """
@@ -337,7 +345,6 @@ class ResultsPrinter(object):
 		utils.mkdir_p(basePath)
 		utils.mkdir_p(basePath+experimentName+"/")
 
-
 		if not cCase: 
 			path = basePath+experimentName+"/"
 		else:
@@ -356,7 +363,6 @@ class ResultsPrinter(object):
 		utils.mkdir_p(basePath)
 		utils.mkdir_p(basePath+experimentName+"/")
 
-
 		if not cCase: 
 			path = basePath+experimentName+"/"
 		else:
@@ -368,8 +374,26 @@ class ResultsPrinter(object):
 		except AttributeError, err:
 			print "Exception AttributeError occurred: ", err
 			print traceback.format_exc()
-		 
-	def writeDirectResults(self, basePath, experimentName, utils, bound_provided, cCase=None):
+
+	def writeComplexRMSD(self, basePath, experimentName, utils, cCase=None):
+
+		np.set_printoptions(threshold=np.nan)
+		utils.mkdir_p(basePath)
+		utils.mkdir_p(basePath+experimentName+"/")
+
+		if not cCase: 
+			path = basePath+experimentName+"/"
+		else:
+			path = basePath+experimentName+"/"+str(cCase)+"/"
+		utils.mkdir_p(path)
+		
+		try: 
+			np.savetxt(path+"C_RMSD_unbound_to_superposed_bound.txt", [self.C_RMSD_unbound_to_superposed_bound], fmt='%15.15f', header='C_RMSD_unbound_to_superposed_bound')
+		except AttributeError, err:
+			print "Exception AttributeError occurred: ", err
+			print traceback.format_exc()
+	 
+	def writeDirectResults(self, basePath, experimentName, utils, bound_provided, investigation, cCase=None):
 		""" Write the direct results to individual text files. 
 		
 		Args:
@@ -383,8 +407,6 @@ class ResultsPrinter(object):
 		np.set_printoptions(threshold=np.nan)
 		utils.mkdir_p(basePath)
 		utils.mkdir_p(basePath+experimentName+"/")
-		print basePath
-		print basePath+experimentName
 
 		if not cCase: 
 			path = basePath+experimentName+"/"
@@ -420,16 +442,7 @@ class ResultsPrinter(object):
 		# 	print "Exception AttributeError occurred: ", err
 		# 	print traceback.format_exc()
 
-		try: 
-			np.savetxt(path+"eigenvaluesReference.txt", self.eigenvaluesReference, fmt='%15.15f', header='eigenvaluesReference')
-		except AttributeError, err:
-			print "Exception AttributeError occurred: ", err
-			print traceback.format_exc() 
-		try: 
-			np.savetxt(path+"eigenvectorsReference.txt", self.eigenvectorsReference, fmt='%15.15f', header='eigenvectorsReference')
-		except AttributeError, err:
-			print "Exception AttributeError occurred: ", err
-			print traceback.format_exc()  
+
 
 		try: 
 			np.savetxt(path+"numberOfModes.txt", [self.numberOfModes], fmt='%d', header='numberOfModes')
@@ -442,6 +455,30 @@ class ResultsPrinter(object):
 		except AttributeError, err:
 			print "Exception AttributeError occurred: ", err
 			print traceback.format_exc()
+		if investigation == "Complex":
+
+			try: 
+				np.savetxt(path+"eigenvaluesComplex.txt", self.eigenvaluesComplex, fmt='%15.15f', header='eigenvaluesComplex')
+			except AttributeError, err:
+				print "Exception AttributeError occurred: ", err
+				print traceback.format_exc()    
+
+			try: 
+				np.savetxt(path+"eigenvectorsComplex.txt", self.eigenvectorsComplex, fmt='%15.15f', header='eigenvectorsComplex')
+			except AttributeError, err:
+				print "Exception AttributeError occurred: ", err
+				print traceback.format_exc()
+		else:
+			try: 
+				np.savetxt(path+"eigenvaluesReference.txt", self.eigenvaluesReference, fmt='%15.15f', header='eigenvaluesReference')
+			except AttributeError, err:
+				print "Exception AttributeError occurred: ", err
+				print traceback.format_exc() 
+			try: 
+				np.savetxt(path+"eigenvectorsReference.txt", self.eigenvectorsReference, fmt='%15.15f', header='eigenvectorsReference')
+			except AttributeError, err:
+				print "Exception AttributeError occurred: ", err
+				print traceback.format_exc()  
 		# try: 
 		# 	np.savetxt(path+"zeroEigvecsProtein1.dat", self.zeroEigvecsProtein1.round(3), fmt='%.3f')
 		# except AttributeError, err:
@@ -464,246 +501,278 @@ class ResultsPrinter(object):
 			
 			try: 
 				np.savetxt(path+"RMSDReductionsWhole.txt", self.RMSDReductionsWhole, fmt='%15.15f', header='RMSDReductionsWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
+
 
 			try: 
 				np.savetxt(path+"overlapTApproxWhole.txt", self.overlapTApproxWhole, fmt='%15.15f', header='overlapTApproxWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
+
 			try: 
 				np.savetxt(path+"stepPointsReductionWhole.txt", self.stepPointsReductionWhole, fmt='%d', header='stepPointsReductionWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
+
 			try: 
 				np.savetxt(path+"RMSDReductionsInterface.txt", self.RMSDReductionsInterface, fmt='%15.15f', header='RMSDReductionsInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
+				
 			try: 
 				np.savetxt(path+"overlapTApproxInterface.txt", self.overlapTApproxInterface, fmt='%15.15f', header='overlapTApproxInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass				
 			try: 
 				np.savetxt(path+"stepPointsReductionInterface.txt", self.stepPointsReductionInterface, fmt='%d', header='stepPointsReductionInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-	 
-			try: 
-				np.savetxt(path+"RMSDReductionsComplex2kWhole.txt", self.RMSDReductionsComplex2kWhole, fmt='%15.15f', header='RMSDReductionsComplex2kWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass	 
+			# try: 
+			# 	np.savetxt(path+"RMSDReductionsComplex2kWhole.txt", self.RMSDReductionsComplex2kWhole, fmt='%15.15f', header='RMSDReductionsComplex2kWhole')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
-			try: 
-				np.savetxt(path+"overlapTApproxComplex2kWhole.txt", self.overlapTApproxComplex2kWhole, fmt='%15.15f', header='overlapTApproxComplex2kWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"overlapTApproxComplex2kWhole.txt", self.overlapTApproxComplex2kWhole, fmt='%15.15f', header='overlapTApproxComplex2kWhole')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 				
-			try: 
-				np.savetxt(path+"stepPointsReductionComplex2kWhole.txt", self.stepPointsReductionComplex2kWhole, fmt='%d', header='stepPointsReductionComplex2kWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"stepPointsReductionComplex2kWhole.txt", self.stepPointsReductionComplex2kWhole, fmt='%d', header='stepPointsReductionComplex2kWhole')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
-			try: 
-				np.savetxt(path+"RMSDReductionsComplex1k1kWhole.txt", self.RMSDReductionsComplex1k1kWhole, fmt='%15.15f', header='RMSDReductionsComplex1k1kWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"RMSDReductionsComplex1k1kWhole.txt", self.RMSDReductionsComplex1k1kWhole, fmt='%15.15f', header='RMSDReductionsComplex1k1kWhole')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
-			try: 
-				np.savetxt(path+"overlapTApproxComplex1k1kWhole.txt", self.overlapTApproxComplex1k1kWhole, fmt='%15.15f', header='overlapTApproxComplex1k1kWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"overlapTApproxComplex1k1kWhole.txt", self.overlapTApproxComplex1k1kWhole, fmt='%15.15f', header='overlapTApproxComplex1k1kWhole')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
-			try: 
-				np.savetxt(path+"stepPointsReductionComplex1k1kWhole.txt", self.stepPointsReductionComplex1k1kWhole, fmt='%d', header='stepPointsReductionComplex1k1kWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"stepPointsReductionComplex1k1kWhole.txt", self.stepPointsReductionComplex1k1kWhole, fmt='%d', header='stepPointsReductionComplex1k1kWhole')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 				
-			try: 
-				np.savetxt(path+"RMSDReductionsComplex2kInterface.txt", self.RMSDReductionsComplex2kInterface, fmt='%15.15f', header='RMSDReductionsComplex2kInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"RMSDReductionsComplex2kInterface.txt", self.RMSDReductionsComplex2kInterface, fmt='%15.15f', header='RMSDReductionsComplex2kInterface')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
-			try: 
-				np.savetxt(path+"overlapTApproxComplex2kInterface.txt", self.overlapTApproxComplex2kInterface, fmt='%15.15f', header='overlapTApproxComplex2kInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"overlapTApproxComplex2kInterface.txt", self.overlapTApproxComplex2kInterface, fmt='%15.15f', header='overlapTApproxComplex2kInterface')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 				
-			try: 
-				np.savetxt(path+"stepPointsReductionComplex2kInterface.txt", self.stepPointsReductionComplex2kInterface, fmt='%d', header='stepPointsReductionComplex2kInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"stepPointsReductionComplex2kInterface.txt", self.stepPointsReductionComplex2kInterface, fmt='%d', header='stepPointsReductionComplex2kInterface')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
-			try: 
-				np.savetxt(path+"RMSDReductionsComplex1k1kInterface.txt", self.RMSDReductionsComplex1k1kInterface, fmt='%15.15f', header='RMSDReductionsComplex1k1kInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"RMSDReductionsComplex1k1kInterface.txt", self.RMSDReductionsComplex1k1kInterface, fmt='%15.15f', header='RMSDReductionsComplex1k1kInterface')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
-			try: 
-				np.savetxt(path+"overlapTApproxComplex1k1kInterface.txt", self.overlapTApproxComplex1k1kInterface, fmt='%15.15f', header='overlapTApproxComplex1k1kInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"overlapTApproxComplex1k1kInterface.txt", self.overlapTApproxComplex1k1kInterface, fmt='%15.15f', header='overlapTApproxComplex1k1kInterface')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 
 			try: 
 				np.savetxt(path+"stepPointsReductionComplex1k1kInterface.txt", self.stepPointsReductionComplex1k1kInterface, fmt='%d', header='stepPointsReductionComplex1k1kInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
 			try: 
 				np.savetxt(path+"RMSD_unbound_to_superposed_bound.txt", [self.RMSD_unbound_to_superposed_bound], fmt='%15.15f', header='RMSD_unbound_to_superposed_bound')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
 			
 			try: 
 				np.savetxt(path+"RMSD_interface.txt", [self.RMSD_interface], fmt='%15.15f', header='RMSD_interface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()        
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()        
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"overlapArrayWhole.txt", self.overlapArrayWhole, fmt='%15.15f', header='overlapArrayWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()        
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()        
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"overlapArrayInterface.txt", self.overlapArrayInterface, fmt='%15.15f', header='overlapArrayInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()            
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()            
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"collectivityArrayWhole.txt", self.collectivityArrayWhole, fmt='%15.15f', header='collectivityArrayWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()  
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()  
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"collectivityArrayInterface.txt", self.collectivityArrayInterface, fmt='%15.15f', header='collectivityArrayInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"correlationArrayWhole.txt", self.correlationArrayWhole, fmt='%15.15f', header='correlationArrayWhole')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()         
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()         
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"correlationArrayInterface.txt", self.correlationArrayInterface, fmt='%15.15f', header='correlationArrayInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()             
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()             
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"cumulOverlapWholePrody.txt", self.cumulOverlapWholePrody, fmt='%15.15f', header='cumulOverlapWholePrody')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-			
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass			
 			try: 
 				np.savetxt(path+"cumulOverlapInterfacePrody.txt", self.cumulOverlapInterfacePrody, fmt='%15.15f', header='cumulOverlapInterfacePrody')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass				
+			# try: 
+			# 	np.savetxt(path+"eigenvaluesComplex2k.txt", self.eigenvaluesComplex2k, fmt='%15.15f', header='eigenvaluesComplex2k')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()   
 				
-			try: 
-				np.savetxt(path+"eigenvaluesComplex2k.txt", self.eigenvaluesComplex2k, fmt='%15.15f', header='eigenvaluesComplex2k')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()   
-				
-			try: 
-				np.savetxt(path+"eigenvaluesReceptor1k.txt", self.eigenvaluesReceptor1k, fmt='%15.15f', header='eigenvaluesReceptor1k')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()  
+			# try: 
+			# 	np.savetxt(path+"eigenvaluesReceptor1k.txt", self.eigenvaluesReceptor1k, fmt='%15.15f', header='eigenvaluesReceptor1k')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()  
 				
 			try: 
 				np.savetxt(path+"eigenvaluesComplex.txt", self.eigenvaluesComplex, fmt='%15.15f', header='eigenvaluesComplex')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()    
-				
-			try: 
-				np.savetxt(path+"eigenvaluesLigand1k.txt", self.eigenvaluesLigand1k, fmt='%15.15f', header='eigenvaluesLigand1k')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()  
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()    
+			except:
+				pass				
+			# try: 
+			# 	np.savetxt(path+"eigenvaluesLigand1k.txt", self.eigenvaluesLigand1k, fmt='%15.15f', header='eigenvaluesLigand1k')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()  
 			   
 				
 			try: 
 				np.savetxt(path+"numberOfModesComplex.txt", [self.numberOfModesComplex], fmt='%d', header='numberOfModesComplex')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()         
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()         
+			except:
+				pass				
 			try: 
 				np.savetxt(path+"numberOfModesInterface.txt", [self.numberOfModesInterface], fmt='%d', header='numberOfModesInterface')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()               
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()               
+			except:
+				pass				
 			# RMSD aided by collectivity
 			try: 
 				np.savetxt(path+"RMSDReductionsWholeByCollectivity.txt", self.RMSDReductionsWholeByCollectivity, fmt='%15.15f', header='RMSDReductionsWholeByCollectivity')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
 			try: 
 				np.savetxt(path+"overlapTApproxWholeByCollectivity.txt", self.overlapTApproxWholeByCollectivity, fmt='%15.15f', header='overlapTApproxWholeByCollectivity')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass				
 			try: 
 				np.savetxt(path+"stepPointsReductionWholeByCollectivity.txt", self.stepPointsReductionWholeByCollectivity, fmt='%d', header='stepPointsReductionWholeByCollectivity')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
 			try: 
 				np.savetxt(path+"RMSDReductionsInterfaceByCollectivity.txt", self.RMSDReductionsInterfaceByCollectivity, fmt='%15.15f', header='RMSDReductionsInterfaceByCollectivity')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
 			try: 
 				np.savetxt(path+"overlapTApproxInterfaceByCollectivity.txt", self.overlapTApproxInterfaceByCollectivity, fmt='%15.15f', header='overlapTApproxInterfaceByCollectivity')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass
 			try: 
 				np.savetxt(path+"stepPointsReductionInterfaceByCollectivity.txt", self.stepPointsReductionInterfaceByCollectivity, fmt='%d', header='stepPointsReductionInterfaceByCollectivity')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass				
 			# RMSD complex assessments
 			try: 
 				np.savetxt(path+"L_rms.txt", [self.L_rms], fmt='%15.15f', header='L_rms')
@@ -711,11 +780,11 @@ class ResultsPrinter(object):
 				print "Exception AttributeError occurred: ", err
 				print traceback.format_exc()
 				
-			try: 
-				np.savetxt(path+"counterpart_rms.txt", [self.counterpart_rms], fmt='%15.15f', header='counterpart_rms')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
+			# try: 
+			# 	np.savetxt(path+"counterpart_rms.txt", [self.counterpart_rms], fmt='%15.15f', header='counterpart_rms')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
 				
 			try: 
 				np.savetxt(path+"I_rms_after_align.txt", [self.I_rms_after_align], fmt='%15.15f', header='I_rms_after_align')
@@ -723,28 +792,28 @@ class ResultsPrinter(object):
 				print "Exception AttributeError occurred: ", err
 				print traceback.format_exc()
 				
-			# measures of comparing hessians
-			try: 
-				np.savetxt(path+"subspaceOverlaps.txt", self.subspaceOverlaps, fmt='%15.15f', header='subspaceOverlaps')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()    
-			try: 
-				np.savetxt(path+"subspaceOverlapsRanges.txt", self.subspaceOverlapsRanges, fmt='%d', header='subspaceOverlapsRanges')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()      
+			# # measures of comparing hessians
+			# try: 
+			# 	np.savetxt(path+"subspaceOverlaps.txt", self.subspaceOverlaps, fmt='%15.15f', header='subspaceOverlaps')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()    
+			# try: 
+			# 	np.savetxt(path+"subspaceOverlapsRanges.txt", self.subspaceOverlapsRanges, fmt='%d', header='subspaceOverlapsRanges')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()      
 
-			try: 
-				np.savetxt(path+"covarianceOverlaps.txt", self.covarianceOverlaps, fmt='%15.15f', header='covarianceOverlaps')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()    
-			try: 
-				np.savetxt(path+"covarianceOverlapsRanges.txt", self.covarianceOverlapsRanges, fmt='%d', header='covarianceOverlapsRanges')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()  
+			# try: 
+			# 	np.savetxt(path+"covarianceOverlaps.txt", self.covarianceOverlaps, fmt='%15.15f', header='covarianceOverlaps')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()    
+			# try: 
+			# 	np.savetxt(path+"covarianceOverlapsRanges.txt", self.covarianceOverlapsRanges, fmt='%d', header='covarianceOverlapsRanges')
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()  
 				
 
 			# try: 
@@ -769,16 +838,18 @@ class ResultsPrinter(object):
 
 			try: 
 				np.savetxt(path+"singleModeOverlapsFromSuperset.txt", self.singleModeOverlapsFromSuperset, fmt='%15.15f', header='singleModeOverlapsFromSuperset')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-				
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()
+			except:
+				pass				
 			try: 
 				np.savetxt(path+"indicesOfLambdaRSorting.txt", self.indicesOfLambdaRSorting, fmt='%d', header='self.indicesOfLambdaRSorting')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()        
-					
+			# except AttributeError, err:
+			# 	print "Exception AttributeError occurred: ", err
+			# 	print traceback.format_exc()        
+			except:
+				pass					
 		# # save PDBs
 		# try: 
 		# 	pdbspath = path+"pdbs/"
@@ -829,17 +900,17 @@ class ResultsPrinter(object):
 		# 	print traceback.format_exc()
 			
 		# compress the pdb folder and delete the folder
-		try:
-			os.chdir(path)
-			shellCommand = "tar -jcvf pdbs.tar.bz2 pdbs/"
-			os.system(shellCommand)
-			shellCommand = "rm -rf pdbs/"
-			os.system(shellCommand)            
-			# change the working path back to the directory of the program
-			os.chdir(os.path.dirname(os.path.abspath(__file__)))
-		except Exception, err:
-			print "Exception occurred when bz2ing and deleting the pdbs folder: ", err
-			print traceback.format_exc()        
+		# try:
+		# 	os.chdir(path)
+		# 	shellCommand = "tar -jcvf pdbs.tar.bz2 pdbs/"
+		# 	os.system(shellCommand)
+		# 	shellCommand = "rm -rf pdbs/"
+		# 	os.system(shellCommand)            
+		# 	# change the working path back to the directory of the program
+		# 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
+		# except Exception, err:
+		# 	print "Exception occurred when bz2ing and deleting the pdbs folder: ", err
+		# 	print traceback.format_exc()        
 						 
 		# combine the files
 		# try:
@@ -868,56 +939,52 @@ class ResultsPrinter(object):
 		return path            
 			
 			
-	def writeNMDResults(self, basePath, experimentName, utils, ANMs, cCase=None, storeANMs=True):
+	def writeNMDResults(self, basePath, experimentName, utils, ANMs, single, cCase=None, storeANMs=True):
 		np.set_printoptions(threshold=np.nan)
 		if not cCase:
 			path = basePath+experimentName+"/"+self.pdbName+"/"
 		else:
 			path = basePath+experimentName+"/"+self.pdbName+"_"+str(cCase)+"/"
 		utils.mkdir_p(path)
-		
-		try: 
-			fileName = "_complex"
-			writeNMD(path+self.pdbName+fileName+"_ANM.nmd", ANMs._anm_complex[0], ANMs._anm_complex[1])
-		except Exception, err:
-			print "Exception occurred when writing "+path+self.pdbName+fileName+"_ANM.nmd file: ", err
-			print traceback.format_exc()        
-		
-		try: 
-			fileName = "_complex"
-			writeNMD(path+self.pdbName+fileName+"_slc_ANM.nmd", ANMs.getANMComplexSlc()[0], ANMs.getANMComplexSlc()[1])
-		except Exception, err:
-			print "Exception occurred when writing "+path+self.pdbName+fileName+"_slc_ANM.nmd file: ", err
-			print traceback.format_exc()
 
 		try: 
 			writeNMD(path+self.pdbName+"_reference_ANM.nmd", ANMs._anm_reference[0], ANMs._anm_reference[1])
 		except Exception, err:
 			print "Exception occurred when writing "+path+self.pdbName+"receptor_slc_ANM.nmd file: ", err
 			print traceback.format_exc()
-			
-		try: 
-			writeNMD(path+self.pdbName+"_reference_slc_ANM.nmd", ANMs._anm_reference_slc[0], ANMs._anm_reference_slc[1])
-		except Exception, err:
-			print "Exception occurred when writing "+path+self.pdbName+"receptor_slc_ANM.nmd file: ", err
-			print traceback.format_exc()
-			
-		try: 
-			writeNMD(path+self.pdbName+"_counterpart_slc_ANM.nmd", ANMs._anm_counterpart_slc[0], ANMs._anm_counterpart_slc[1])
-		except Exception, err:
-			print "Exception occurred when writing "+path+self.pdbName+"ligand_slc_ANM.nmd file: ", err
-			print traceback.format_exc()
-			
-		try: 
-			writeNMD(path+self.pdbName+"_counterpart_ANM.nmd", ANMs._anm_counterpart[0], ANMs._anm_counterpart[1])
-		except Exception, err:
-			print "Exception occurred when writing "+path+self.pdbName+"ligand_ANM.nmd file: ", err
-			print traceback.format_exc()
-			
-		try:
-			writeNMD(path+self.pdbName+"_complex_slc_interface_ANM.nmd", ANMs._anm_boundcomplex_slc_interface[0], ANMs._anm_boundcomplex_slc_interface[1])
-		except Exception, err:
-			pass
+
+       
+		if single == False:
+			try: 
+				fileName = "_complex"
+				writeNMD(path+self.pdbName+fileName+"_slc_ANM.nmd", ANMs.getANMComplexSlc()[0], ANMs.getANMComplexSlc()[1])
+			except Exception, err:
+				print "Exception occurred when writing "+path+self.pdbName+fileName+"_slc_ANM.nmd file: ", err
+				print traceback.format_exc()
+			try: 
+				fileName = "_complex"
+				writeNMD(path+self.pdbName+fileName+"_ANM.nmd", ANMs._anm_complex[0], ANMs._anm_complex[1])
+			except Exception, err:
+				print "Exception occurred when writing "+path+self.pdbName+fileName+"_ANM.nmd file: ", err
+				print traceback.format_exc() 
+				
+				
+			# try: 
+			# 	writeNMD(path+self.pdbName+"_counterpart_slc_ANM.nmd", ANMs._anm_counterpart_slc[0], ANMs._anm_counterpart_slc[1])
+			# except Exception, err:
+			# 	print "Exception occurred when writing "+path+self.pdbName+"ligand_slc_ANM.nmd file: ", err
+			# 	print traceback.format_exc()
+				
+			try: 
+				writeNMD(path+self.pdbName+"_counterpart_ANM.nmd", ANMs._anm_counterpart[0], ANMs._anm_counterpart[1])
+			except Exception, err:
+				print "Exception occurred when writing "+path+self.pdbName+"ligand_ANM.nmd file: ", err
+				print traceback.format_exc()
+				
+			try:
+				writeNMD(path+self.pdbName+"_complex_slc_interface_ANM.nmd", ANMs._anm_boundcomplex_slc_interface[0], ANMs._anm_boundcomplex_slc_interface[1])
+			except Exception, err:
+				pass
 			#print "Exception occurred when writing "+path+self.pdbName+"_complex_slc_interface.nmd file: ", err
 			#print traceback.format_exc()            
 			
