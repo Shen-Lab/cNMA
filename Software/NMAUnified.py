@@ -319,7 +319,7 @@ class NMAUnified(TNMABase):
 		assert self.config.investigationsOn == "Individual" or self.config.investigationsOn == "Complex"
 		encounter.initANMs(self.utils)
 		
-		if self.config.investigationsOn == "Individual":
+		if self.config.investigationsOn == "Individual" or self.config.investigationsOn == "Complex":
 			maxModes = min((encounter.getReference().select('calpha').numAtoms()*3 -6), self.config.maxModesToCalculate)
 			if self.bound_provided == True:
 				encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
@@ -349,30 +349,30 @@ class NMAUnified(TNMABase):
 				else:
 					encounter.accessANMs().replaceReferenceANMs(anm_reference_rescaledEigenvals, encounter.getReference())     
 		
-		elif self.config.investigationsOn == "Complex":
-			assert self.config.complexRMSDreduction == "1k1k" or self.config.complexRMSDreduction == "2k" or self.config.complexRMSDreduction == "1k1k6"
-			assert self.config.whichCustomHC == "HC_0" or self.config.whichCustomHC == "HC_U1" or self.utils.config.whichCustomHC == "HC_06" or self.utils.config.whichCustomHC == "HC_U1_1k1k"
+		# elif self.config.investigationsOn == "Complex":
+		# 	assert self.config.complexRMSDreduction == "1k1k" or self.config.complexRMSDreduction == "2k" or self.config.complexRMSDreduction == "1k1k6"
+		# 	assert self.config.whichCustomHC == "HC_0" or self.config.whichCustomHC == "HC_U1" or self.utils.config.whichCustomHC == "HC_06" or self.utils.config.whichCustomHC == "HC_U1_1k1k"
 
-			maxModes = min((encounter.getReference().select('calpha').numAtoms()*3 -6), (encounter.getUnboundCounterpart().select('calpha').numAtoms()*3 -6), self.config.maxModesToCalculate)
-			if self.bound_provided == True:
-				encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
-												 encounter.getUnboundCounterpart(), 
-												 encounter.unboundComplexAligned.complex,
-												 maxModes,
-												 encounter,
-												 encounter.getRefChain(),
-												 encounter.getUnboundCounterpartChain(), 
-												 encounter.getUnboundComplexAlignedChain(),
-												 selstr='calpha', 
-												 whatAtomsToMatch=self.config.whatAtomsToMatch)
-			else:
-				encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
-												 encounter.getUnboundCounterpart(), 
-												 encounter.unboundComplexAligned.complex,
-												 maxModes,
-												 encounter,
-												 selstr='calpha', 
-												 whatAtomsToMatch=self.config.whatAtomsToMatch)				
+		# 	maxModes = min((encounter.getReference().select('calpha').numAtoms()*3 -6), (encounter.getUnboundCounterpart().select('calpha').numAtoms()*3 -6), self.config.maxModesToCalculate)
+		# 	if self.bound_provided == True:
+		# 		encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
+		# 										 encounter.getUnboundCounterpart(), 
+		# 										 encounter.unboundComplexAligned.complex,
+		# 										 maxModes,
+		# 										 encounter,
+		# 										 encounter.getRefChain(),
+		# 										 encounter.getUnboundCounterpartChain(), 
+		# 										 encounter.getUnboundComplexAlignedChain(),
+		# 										 selstr='calpha', 
+		# 										 whatAtomsToMatch=self.config.whatAtomsToMatch)
+		# 	else:
+		# 		encounter.accessANMs().calcANMsUnified(encounter.getReference(), 
+		# 										 encounter.getUnboundCounterpart(), 
+		# 										 encounter.unboundComplexAligned.complex,
+		# 										 maxModes,
+		# 										 encounter,
+		# 										 selstr='calpha', 
+		# 										 whatAtomsToMatch=self.config.whatAtomsToMatch)				
 			
 			# # Mode classifier, rescale eigenvalues 
 			# if self.config.rescaleEigenvalues:     
@@ -751,10 +751,9 @@ class NMAUnified(TNMABase):
 				encounter.resultsPrinter.setOverlapTApproxInterface(dataHolder.overlapTApproxInterface)
 				encounter.resultsPrinter.setStepPointsReductionInterface(dataHolder.stepPointsReductionInterface)
 				encounter.resultsPrinter.setRMSD_interface(dataHolder.RMSD_interface)
-			if self.config.investigationsOn == "Individual":
+			if self.config.investigationsOn == "Individual" or self.config.investigationsOn == "Complex":
 				encounter.resultsPrinter.setEigenvectorsReference(encounter.accessANMs().getANMReference()[0].getArray().T)			
 				encounter.resultsPrinter.setEigenvaluesReference(encounter.accessANMs().getANMReferenceSlc()[0].getEigvals())
-			if self.config.investigationsOn == "Complex":
 				encounter.resultsPrinter.setEigenvaluesComplex(encounter.accessANMs().getANMComplexSlc()[0].getEigvals())
 				encounter.resultsPrinter.setEigenvectorsComplex(encounter.accessANMs().getANMComplexSlc()[0].getArray().T)
 
@@ -822,10 +821,9 @@ class NMAUnified(TNMABase):
 			except Exception:
 				pass
 		else:
-			if self.config.investigationsOn == "Individual":
+			if self.config.investigationsOn == "Individual" or self.config.investigationsOn == "Complex":
 				encounter.resultsPrinter.setEigenvectorsReference(encounter.accessANMs().getANMReference()[0].getArray().T)
 				encounter.resultsPrinter.setEigenvaluesReference(encounter.accessANMs().getANMReferenceSlc()[0].getEigvals())
-			if self.config.investigationsOn == "Complex":
 				encounter.resultsPrinter.setEigenvectorsComplex(encounter.accessANMs().getANMComplexSlc()[0].getArray().T)
 				encounter.resultsPrinter.setEigenvaluesComplex(encounter.accessANMs().getANMComplexSlc()[0].getEigvals())
 

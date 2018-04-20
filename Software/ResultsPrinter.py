@@ -455,30 +455,30 @@ class ResultsPrinter(object):
 		except AttributeError, err:
 			print "Exception AttributeError occurred: ", err
 			print traceback.format_exc()
-		if investigation == "Complex":
+#		if investigation == "Complex":
 
-			try: 
-				np.savetxt(path+"eigenvaluesComplex.txt", self.eigenvaluesComplex, fmt='%15.15f', header='eigenvaluesComplex')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()    
+		try: 
+			np.savetxt(path+"eigenvaluesComplex.txt", self.eigenvaluesComplex, fmt='%15.15f', header='eigenvaluesComplex')
+		except AttributeError, err:
+			print "Exception AttributeError occurred: ", err
+			print traceback.format_exc()    
 
-			try: 
-				np.savetxt(path+"eigenvectorsComplex.txt", self.eigenvectorsComplex, fmt='%15.15f', header='eigenvectorsComplex')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()
-		else:
-			try: 
-				np.savetxt(path+"eigenvaluesReference.txt", self.eigenvaluesReference, fmt='%15.15f', header='eigenvaluesReference')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc() 
-			try: 
-				np.savetxt(path+"eigenvectorsReference.txt", self.eigenvectorsReference, fmt='%15.15f', header='eigenvectorsReference')
-			except AttributeError, err:
-				print "Exception AttributeError occurred: ", err
-				print traceback.format_exc()  
+		try: 
+			np.savetxt(path+"eigenvectorsComplex.txt", self.eigenvectorsComplex, fmt='%15.15f', header='eigenvectorsComplex')
+		except AttributeError, err:
+			print "Exception AttributeError occurred: ", err
+			print traceback.format_exc()
+#		else:
+		try: 
+			np.savetxt(path+"eigenvaluesReference.txt", self.eigenvaluesReference, fmt='%15.15f', header='eigenvaluesReference')
+		except AttributeError, err:
+			print "Exception AttributeError occurred: ", err
+			print traceback.format_exc() 
+		try: 
+			np.savetxt(path+"eigenvectorsReference.txt", self.eigenvectorsReference, fmt='%15.15f', header='eigenvectorsReference')
+		except AttributeError, err:
+			print "Exception AttributeError occurred: ", err
+			print traceback.format_exc()  
 		# try: 
 		# 	np.savetxt(path+"zeroEigvecsProtein1.dat", self.zeroEigvecsProtein1.round(3), fmt='%.3f')
 		# except AttributeError, err:

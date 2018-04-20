@@ -15,10 +15,10 @@ class RMSDPrediction(object):
 		Constructor
 		'''
 		self.investigationsOn = investigationsOn
-		if investigationsOn == "Individual":
-			self.path = os.path.dirname(__file__) + "/10AA_individual/"
-		if investigationsOn == "Complex":
-			self.path = os.path.dirname(__file__) + "/10AA_complex/"
+#		if investigationsOn == "Individual":
+		self.path = os.path.dirname(__file__) + "/10AA_individual/"
+#		if investigationsOn == "Complex":
+#			self.path = os.path.dirname(__file__) + "/10AA_complex/"
 		os.environ['paramsPath'] = self.path+'params.txt'
 		#self.index = os.popen("if [ -e $paramsPath ]; then d=true; else d=false; fi; echo -n $d").read()
 		self.index = os.path.exists("$paramsPath")
@@ -44,12 +44,12 @@ class RMSDPrediction(object):
 		'''
 		Input eigenvalues file
 		'''
-		if self.investigationsOn == "Individual":
-			filename = pd.read_csv(path + 'eigenvaluesReference.txt')
-			eigenvalues = filename.values
-		if self.investigationsOn == "Complex":
-			filename = pd.read_csv(path + 'eigenvaluesComplex.txt')
-			eigenvalues = filename.values[6:]
+#		if self.investigationsOn == "Individual":
+		filename = pd.read_csv(path + 'eigenvaluesReference.txt')
+		eigenvalues = filename.values
+#		if self.investigationsOn == "Complex":
+#			filename = pd.read_csv(path + 'eigenvaluesComplex.txt')
+#			eigenvalues = filename.values[6:]
 		return eigenvalues
 
 	def calculation(self, eigenvalues, title):
@@ -65,21 +65,21 @@ class RMSDPrediction(object):
 		n = np.zeros([eig_len, 2], float)
 
 		#read size
-		if self.investigationsOn == "Individual":
-			os.environ['pdbPath'] = self.protein1_A
-			os.system("grep ' CA ' $pdbPath | wc -l > Nres.txt")
-			size = np.loadtxt("Nres.txt")
-			os.system("rm Nres.txt")
-		if self.investigationsOn == "Complex":
-			os.environ['pdbAPath'] = self.protein1_A
-			os.environ['pdbBPath'] = self.protein2_A
-			os.system("grep ' CA ' $pdbAPath | wc -l > r_Nres.txt")
-			os.system("grep ' CA ' $pdbBPath | wc -l > l_Nres.txt")
-			size_r = np.loadtxt("r_Nres.txt")
-			size_l = np.loadtxt("l_Nres.txt")
-			os.system("rm r_Nres.txt")
-			os.system("rm l_Nres.txt")
-			size = size_r + size_l
+#		if self.investigationsOn == "Individual":
+		os.environ['pdbPath'] = self.protein1_A
+		os.system("grep ' CA ' $pdbPath | wc -l > Nres.txt")
+		size = np.loadtxt("Nres.txt")
+		os.system("rm Nres.txt")
+#		if self.investigationsOn == "Complex":
+#			os.environ['pdbAPath'] = self.protein1_A
+#			os.environ['pdbBPath'] = self.protein2_A
+#			os.system("grep ' CA ' $pdbAPath | wc -l > r_Nres.txt")
+#			os.system("grep ' CA ' $pdbBPath | wc -l > l_Nres.txt")
+#			size_r = np.loadtxt("r_Nres.txt")
+#			size_l = np.loadtxt("l_Nres.txt")
+#			os.system("rm r_Nres.txt")
+#			os.system("rm l_Nres.txt")
+#			size = size_r + size_l
 
 
 		#size cutoff

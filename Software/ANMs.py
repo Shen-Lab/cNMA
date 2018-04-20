@@ -147,7 +147,7 @@ class ANMs(object):
 			self.bound_provided = False
 		else:
 			self.bound_provided = True
-		if self.utils.config.investigationsOn == "Individual":
+		if self.utils.config.investigationsOn == "Individual" or self.utils.config.investigationsOn == "Complex" :
 			assert self.utils.config.whichCustomHIndividual == "HC_subvector" or self.utils.config.whichCustomHIndividual == "submatrix" or self.utils.config.whichCustomHIndividual == "canonical"
 			numberOfModesComplex = min((proteinComplex.select('calpha').numAtoms()*3 - 6), self.utils.config.maxModesToCalculate)
 			if ref_chain != None:
@@ -160,11 +160,11 @@ class ANMs(object):
 				self._anm_complex, self._anm_complex_slc = self._calcANMsUnified(proteinComplex, numberOfModesComplex, selstr, whatAtomsToMatch, chain_complex)
 			else:
 				self._anm_complex, self._anm_complex_slc = self._calcANMsUnified(proteinComplex, numberOfModesComplex, selstr, whatAtomsToMatch)
-		elif self.utils.config.investigationsOn == "Complex":
-			numberOfModesComplex = numberOfModes*2
-			self._anm_reference, self._anm_reference_slc = self._calcANMsUnified(reference, numberOfModes, selstr, whatAtomsToMatch, ref_chain)
-			self._anm_counterpart, self._anm_counterpart_slc = self._calcANMsUnified(counterpart, numberOfModes, selstr, whatAtomsToMatch, counterpart_chain)
-			self._anm_complex, self._anm_complex_slc = self._calcANMsUnified(proteinComplex, numberOfModesComplex, selstr, whatAtomsToMatch, chain_complex)
+		# elif self.utils.config.investigationsOn == "Complex":
+		# 	numberOfModesComplex = numberOfModes*2
+		# 	self._anm_reference, self._anm_reference_slc = self._calcANMsUnified(reference, numberOfModes, selstr, whatAtomsToMatch, ref_chain)
+		# 	self._anm_counterpart, self._anm_counterpart_slc = self._calcANMsUnified(counterpart, numberOfModes, selstr, whatAtomsToMatch, counterpart_chain)
+		# 	self._anm_complex, self._anm_complex_slc = self._calcANMsUnified(proteinComplex, numberOfModesComplex, selstr, whatAtomsToMatch, chain_complex)
 
 		print "anm_reference anm_counterpart, anm_complex getArray() shapes : ", self._anm_reference[0].getArray().shape, self._anm_counterpart[0].getArray().shape, self._anm_complex[0].getArray().shape
 		print "anm_reference_slc, anm_complex_slc getArray() shapes : ", self._anm_reference_slc[0].getArray().shape, self._anm_complex_slc[0].getArray().shape
@@ -219,7 +219,7 @@ class ANMs(object):
 			# Projection
 			#     def projectHessian(self, hessian, reference, proteinComplex, referenceSegment, projectionStyle, projectOnlyReferencePartOfHC=False, interCalphaIndices=None):
 			if self.utils.config.projectHessian:
-				if self.utils.config.investigationsOn == "Individual":
+				if self.utils.config.investigationsOn == "Individual" or self.utils.config.investigationsOn == "Complex":
 					if self.utils.isReceptor(reference.getTitle()):
 						if self.utils.config.whichCustomHC == "HC_U1":
 							if self.utils.config.projectionStyle == "full" or self.utils.config.projectionStyle == "intra":
@@ -275,7 +275,7 @@ class ANMs(object):
 				self._anm_complex_slc = self._anm_complex_tilde_slc
 		
 			# modify HR to have the sliced part of HC_tilde
-			if self.utils.config.investigationsOn == "Individual":
+			if self.utils.config.investigationsOn == "Individual" or self.utils.config.investigationsOn == "Complex":
 				if self.utils.config.whichCustomHIndividual == "HC_subvector":
 					Marray = self.utils.sliceComplexModestoMatchProtein(self._anm_complex[0].getArray(), reference, encounter.getReferenceSegment())
 					self._anm_reference_tilde = ANM(self._anm_reference[0].getTitle()+"_"+self.utils.config.whichCustomHC)
