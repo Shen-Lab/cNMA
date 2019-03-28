@@ -28,6 +28,7 @@ from prody.dynamics.functions import writeArray
 from helperScripts.scriptutils import makeStringEndWith
 from prody.proteins.pdbfile import writePDB
 from prody.dynamics.anm import ANM
+from Sampling import complex_sampling
 import traceback
 
 class NMAUnified(TNMABase):
@@ -914,7 +915,7 @@ class NMAUnified(TNMABase):
 		# 	proteinFrom = encounter.getReference()
 		# 	anmReferenceTemp = encounter.accessANMs().getANMReference()
 		# 	anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
-		# 	ensem = sampleModes(anmReference[0][6:107], proteinFrom, 100, RMSDPredicted)
+		 #	ensem = sampleModes(anmReference[0][6:107], proteinFrom, 100, RMSDPredicted)
 		# 	# RMSDtostart = []
 		# 	# RMSDtobound = []
 		# 	# print type(proteinFrom)
@@ -943,7 +944,7 @@ class NMAUnified(TNMABase):
 			if protein1_B == None and protein2_B == None:
 				assert os.path.isfile(protein1_A)
 				assert os.path.isfile(protein2_A)
-				print "NMA without post analysis"
+				print "NMA without post analysis hehe"
 				self.bound_provided = False
 			else:
 				assert os.path.isfile(protein1_A)
@@ -1025,6 +1026,8 @@ class NMAUnified(TNMABase):
 			
 
 			# sampling
+# Yue edited on Feb 21,2019: close sampling
+
 			if self.config.investigationsOn == "Individual":
 				proteinFrom = encounter.getReference()
 				anmReferenceTemp = encounter.accessANMs().getANMReference()
@@ -1033,11 +1036,19 @@ class NMAUnified(TNMABase):
 				ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
 			
 			if self.config.investigationsOn == "Complex":
-
+				#print 'rrrrrrrrrrrrrrrrrrrrrrrrr'
 				proteinFrom = encounter.unboundComplexAligned.complex
 				anmReferenceTemp = encounter.accessANMs().getANMComplexSlc()
-				anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
-				ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
+				#print len(anmReferenceTemp[0].getEigvals()), len(anmReferenceTemp[0].getArray()),len(anmReferenceTemp[0].getArray()[0])
+				#print anmReferenceTemp[0].getEigvals()
+		
+				anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=False)
+				#print anmReference[0][6:106].getVariance()
+				#exit(0)
+				nresir=len (encounter.accessANMs().getANMReference()[0].getArray())/3
+				Samples = complex_sampling(anmReferenceTemp[0], anmReference[0], nresir, proteinFrom, RMSDPredicted)
+				ensem = Samples.generate(50)
+			#	ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
 
 
 			# RMSDtostart = []
@@ -1049,8 +1060,8 @@ class NMAUnified(TNMABase):
    # 				RMSDtostart.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinFrom))
    # 				if self.bound_provided == True:
 		# 			RMSDtobound.append(calcRMSD(ensem.getConformation(sample_index).getCoords(), proteinTo))
-			# proteinFromTemp = proteinFrom.copy()	
-			# proteinFromTemp.addCoordset(ensem)
+#			proteinFromTemp = proteinFrom.copy()	
+#			proteinFromTemp.addCoordset(ensem)
 			encounter.resultsPrinter.setEnsemble(ensem)
 			# encounter.resultsPrinter.setRMSDtostart(RMSDtostart)
 			# encounter.resultsPrinter.setRMSDtobound(RMSDtobound)
@@ -1061,6 +1072,7 @@ class NMAUnified(TNMABase):
 
 
 			print "Results have been written to: ", resultsPath
+		#	print encounter.accessANMs().getANMComplexSlc()[0].getEigvals()
 			return resultsPath
 
 			

@@ -1,0 +1,25 @@
+Wed Mar 27 20:30:37 2019    /home/cyppsp/cNMA_github/Manual/Example/Example5/Output/profiler.pro
+
+         1487837 function calls (1471370 primitive calls) in 4.334 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1008 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    4.334    4.334 /home/cyppsp/cNMA_github/Software/NMAUnified.py:853(mainCalculation)
+        1    0.000    0.000    1.920    1.920 /home/cyppsp/cNMA_github/Software/NMAUnified.py:314(setupNMA)
+        1    0.008    0.008    1.781    1.781 /home/cyppsp/cNMA_github/Software/ANMs.py:144(calcANMsUnified)
+        1    0.000    0.000    0.987    0.987 /home/cyppsp/cNMA_github/Software/NMAUnified.py:720(outputResults)
+        1    0.000    0.000    0.758    0.758 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:942(writeNMDResults)
+        2    0.004    0.002    0.735    0.368 /home/cyppsp/cNMA_github/Software/ANMs.py:1360(calcCustomH_ANew)
+        5    0.624    0.125    0.673    0.135 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/proteins/pdbfile.py:784(writePDBStream)
+     3377    0.020    0.000    0.662    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/pointer.py:46(__eq__)
+        1    0.000    0.000    0.639    0.639 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:342(writeSampleResults)
+        1    0.000    0.000    0.638    0.638 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/proteins/pdbfile.py:924(writePDB)
+     3403    0.037    0.000    0.606    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:263(__eq__)
+        4    0.552    0.138    0.552    0.138 {posix.system}
+     3387    0.006    0.000    0.538    0.000 {all}
+    45366    0.352    0.000    0.532    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:270(<genexpr>)
+       48    0.008    0.000    0.510    0.011 /home/cyppsp/cNMA_github/Software/Utils.py:374(getMatchingStructureSelections)
+
+
