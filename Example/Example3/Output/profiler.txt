@@ -1,0 +1,25 @@
+Sat Mar 30 11:00:15 2019    /home/cyppsp/cNMA_github/Example/Example3/Output/profiler.pro
+
+         35468412 function calls (35147987 primitive calls) in 101.763 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1273 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001  101.763  101.763 /home/cyppsp/cNMA_github//Software/NMAUnified.py:853(mainCalculation)
+        1    0.001    0.001   75.298   75.298 /home/cyppsp/cNMA_github//Software/NMAUnified.py:394(calculateMeasuresExpanding)
+        1    0.006    0.006   74.947   74.947 /home/cyppsp/cNMA_github/Software/RMSDReducer.py:436(calcRMSDReductionsExpandingSet)
+       58    0.001    0.000   74.572    1.286 /home/cyppsp/cNMA_github/Software/timeout.py:19(wrapper)
+       58    0.003    0.000   74.571    1.286 /home/cyppsp/cNMA_github/Software/RMSDReducer.py:799(obtainLstSqBetasGeneralizedExpanding)
+       58    0.000    0.000   74.352    1.282 <decorator-gen-7>:1(cg)
+       58    0.001    0.000   74.352    1.282 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/_lib/_threadsafety.py:44(caller)
+       58    9.952    0.172   74.349    1.282 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/isolve/iterative.py:265(cg)
+   833461    2.325    0.000   59.822    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:188(matvec)
+   416815    0.444    0.000   54.858    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:176(_matvec)
+   416815    0.852    0.000   54.212    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:290(matmat)
+   416815    0.324    0.000   52.836    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/sparse/linalg/interface.py:609(_matmat)
+   416815   52.512    0.000   52.512    0.000 {method 'dot' of 'numpy.ndarray' objects}
+        1    0.001    0.001   14.416   14.416 /home/cyppsp/cNMA_github//Software/NMAUnified.py:314(setupNMA)
+        1    0.019    0.019   13.680   13.680 /home/cyppsp/cNMA_github/Software/ANMs.py:144(calcANMsUnified)
+
+

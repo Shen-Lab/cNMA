@@ -1,0 +1,81 @@
+REMARK AtomGroup 1A2K_l_u AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (AtomMap (Atom N (index 99)) + (Atom CA (index 100))) + (Atom C (index 101))) + (Atom O (index 102))) + (Atom N (index 255))) + (Atom CA (index 256))) + (Atom C (index 257))) + (Atom O (index 258))) + (Atom N (index 267))) + (Atom CA (index 268))) + (Atom C (index 269))) + (Atom O (index 270))) + (Atom N (index 274))) + (Atom CA (index 275))) + (Atom C (index 276))) + (Atom O (index 277))) + (Atom N (index 279))) + (Atom CA (index 280))) + (Atom C (index 281))) + (Atom O (index 282))) + (Atom N (index 286))) + (Atom CA (index 287))) + (Atom C (index 288))) + (Atom O (index 289))) + (Atom N (index 294))) + (Atom CA (index 295))) + (Atom C (index 296))) + (Atom O (index 297))) + (Atom N (index 483))) + (Atom CA (index 484))) + (Atom C (index 485))) + (Atom O (index 486))) + (Atom N (index 488))) + (Atom CA (index 489))) + (Atom C (index 490))) + (Atom O (index 491))) + (Atom N (index 492))) + (Atom CA (index 493))) + (Atom C (index 494))) + (Atom O (index 495))) + (Atom N (index 501))) + (Atom CA (index 502))) + (Atom C (index 503))) + (Atom O (index 504))) + (Atom N (index 510))) + (Atom CA (index 511))) + (Atom C (index 512))) + (Atom O (index 513))) + (Atom N (index 519))) + (Atom CA (index 520))) + (Atom C (index 521))) + (Atom O (index 522))) + (Atom N (index 531))) + (Atom CA (index 532))) + (Atom C (index 533))) + (Atom O (index 534))) + (Atom N (index 535))) + (Atom CA (index 536))) + (Atom C (index 537))) + (Atom O (index 538))) + (Atom N (index 547))) + (Atom CA (index 548))) + (Atom C (index 549))) + (Atom O (index 550))) + (Atom N (index 558))) + (Atom CA (index 559))) + (Atom C (index 560))) + (Atom O (index 561))) + (Atom N (index 566))) + (Atom CA (index 567))) + (Atom C (index 568))) + (Atom O (index 569))) + (Atom N (index 570))) + (Atom CA (index 571))) + (Atom C (index 572))) + (Atom O (index 573))) + (Atom N (index 594))) + (Atom CA (index 595))) + (Atom C (index 596))) + (Atom O (index 597))
+ATOM      1  N   GLY A  19      61.280  -4.338  67.206  5.00  0.00      LA     -
+ATOM      2  CA  GLY A  19      59.972  -4.962  67.047  5.00  0.00      LA      
+ATOM      3  C   GLY A  19      59.893  -6.211  67.926  5.00  0.00      LA      
+ATOM      4  O   GLY A  19      60.922  -6.857  68.182  5.00  0.00      LA     -
+ATOM      5  N   TYR A  39      45.706   8.576  65.286  3.00  0.00      LA     -
+ATOM      6  CA  TYR A  39      46.529   7.892  64.296  3.00  0.00      LA      
+ATOM      7  C   TYR A  39      46.997   8.821  63.186  3.00  0.00      LA      
+ATOM      8  O   TYR A  39      46.141   9.460  62.586  3.00  0.00      LA     -
+ATOM      9  N   VAL A  40      48.313   8.979  62.962 12.00  0.00      LA     -
+ATOM     10  CA  VAL A  40      48.838   9.816  61.891 12.00  0.00      LA      
+ATOM     11  C   VAL A  40      49.640   8.952  60.911 12.00  0.00      LA      
+ATOM     12  O   VAL A  40      50.839   8.696  61.136 12.00  0.00      LA     -
+ATOM     13  N   ALA A  41      49.069   8.586  59.771 12.00  0.00      LA     -
+ATOM     14  CA  ALA A  41      49.622   7.642  58.821 12.00  0.00      LA      
+ATOM     15  C   ALA A  41      50.941   8.002  58.172 12.00  0.00      LA      
+ATOM     16  O   ALA A  41      51.813   7.108  58.041 12.00  0.00      LA     -
+ATOM     17  N   THR A  42      51.153   9.284  57.810  2.00  0.00      LA     -
+ATOM     18  CA  THR A  42      52.390   9.698  57.178  2.00  0.00      LA      
+ATOM     19  C   THR A  42      53.587   9.738  58.099  2.00  0.00      LA      
+ATOM     20  O   THR A  42      54.723   9.407  57.690  2.00  0.00      LA     -
+ATOM     21  N   LEU A  43      53.430   9.967  59.408 12.00  0.00      LA     -
+ATOM     22  CA  LEU A  43      54.489   9.769  60.383 12.00  0.00      LA      
+ATOM     23  C   LEU A  43      54.678   8.324  60.826 12.00  0.00      LA      
+ATOM     24  O   LEU A  43      55.682   8.013  61.486 12.00  0.00      LA     -
+ATOM     25  N   GLY A  44      53.724   7.415  60.655  5.00  0.00      LA     -
+ATOM     26  CA  GLY A  44      53.833   6.031  61.131  5.00  0.00      LA      
+ATOM     27  C   GLY A  44      53.728   5.997  62.665  5.00  0.00      LA      
+ATOM     28  O   GLY A  44      54.577   5.413  63.348  5.00  0.00      LA     -
+ATOM     29  N   ALA A  67      53.840   2.437  64.256 12.00  0.00      LA     -
+ATOM     30  CA  ALA A  67      52.921   1.601  63.509 12.00  0.00      LA      
+ATOM     31  C   ALA A  67      53.571   0.319  63.002 12.00  0.00      LA      
+ATOM     32  O   ALA A  67      53.126  -0.291  62.019 12.00  0.00      LA     -
+ATOM     33  N   GLY A  68      54.730  -0.083  63.512  5.00  0.00      LA     -
+ATOM     34  CA  GLY A  68      55.349  -1.323  63.138  5.00  0.00      LA      
+ATOM     35  C   GLY A  68      56.414  -1.229  62.082  5.00  0.00      LA      
+ATOM     36  O   GLY A  68      57.074  -2.254  61.838  5.00  0.00      LA     -
+ATOM     37  N   GLN A  69      56.831  -0.039  61.672  2.00  0.00      LA     -
+ATOM     38  CA  GLN A  69      57.860   0.209  60.705  3.00  0.00      LA      
+ATOM     39  C   GLN A  69      59.309   0.018  61.148  3.00  0.00      LA      
+ATOM     40  O   GLN A  69      60.150  -0.155  60.230  3.00  0.00      LA     -
+ATOM     41  N   GLU A  70      59.630  -0.221  62.414  8.00  0.00      LA     -
+ATOM     42  CA  GLU A  70      60.893  -0.586  62.994  8.00  0.00      LA      
+ATOM     43  C   GLU A  70      61.326  -2.028  62.735  8.00  0.00      LA      
+ATOM     44  O   GLU A  70      62.537  -2.337  62.701  8.00  0.00      LA     -
+ATOM     45  N   LYS A  71      60.439  -2.937  62.341  4.00  0.00      LA     -
+ATOM     46  CA  LYS A  71      60.775  -4.268  61.900  4.00  0.00      LA      
+ATOM     47  C   LYS A  71      61.479  -4.345  60.538  4.00  0.00      LA      
+ATOM     48  O   LYS A  71      62.260  -5.288  60.318  2.00  0.00      LA     -
+ATOM     49  N   TYR A  72      61.265  -3.415  59.614  3.00  0.00      LA     -
+ATOM     50  CA  TYR A  72      61.921  -3.509  58.325  3.00  0.00      LA      
+ATOM     51  C   TYR A  72      62.770  -2.303  57.999  3.00  0.00      LA      
+ATOM     52  O   TYR A  72      63.150  -2.157  56.837  3.00  0.00      LA     -
+ATOM     53  N   GLY A  73      63.115  -1.520  59.018  5.00  0.00      LA     -
+ATOM     54  CA  GLY A  73      63.969  -0.362  58.840  5.00  0.00      LA      
+ATOM     55  C   GLY A  73      64.009   0.535  60.076  5.00  0.00      LA      
+ATOM     56  O   GLY A  73      63.514   0.178  61.150  5.00  0.00      LA     -
+ATOM     57  N   GLY A  74      64.620   1.713  59.915  5.00  0.00      LA     -
+ATOM     58  CA  GLY A  74      64.749   2.662  61.014  5.00  0.00      LA      
+ATOM     59  C   GLY A  74      63.624   3.694  60.904  5.00  0.00      LA      
+ATOM     60  O   GLY A  74      62.816   3.608  59.981  5.00  0.00      LA     -
+ATOM     61  N   ARG A  76      62.229   7.764  60.652  4.00  0.00      LA     -
+ATOM     62  CA  ARG A  76      62.699   9.049  60.114  4.00  0.00      LA      
+ATOM     63  C   ARG A  76      62.963  10.090  61.172  4.00  0.00      LA      
+ATOM     64  O   ARG A  76      62.479  10.056  62.314  3.00  0.00      LA     -
+ATOM     65  N   ASP A  77      63.525  11.237  60.778  8.00  0.00      LA     -
+ATOM     66  CA  ASP A  77      63.800  12.360  61.659  9.00  0.00      LA      
+ATOM     67  C   ASP A  77      62.582  13.130  62.121  8.00  0.00      LA      
+ATOM     68  O   ASP A  77      62.537  13.560  63.288  8.00  0.00      LA     -
+ATOM     69  N   GLY A  78      61.426  13.105  61.460  5.00  0.00      LA     -
+ATOM     70  CA  GLY A  78      60.152  13.635  61.877  5.00  0.00      LA      
+ATOM     71  C   GLY A  78      59.524  12.986  63.094  5.00  0.00      LA      
+ATOM     72  O   GLY A  78      58.862  13.623  63.920  5.00  0.00      LA     -
+ATOM     73  N   TYR A  79      59.779  11.710  63.363  3.00  0.00      LA     -
+ATOM     74  CA  TYR A  79      59.382  11.014  64.568  3.00  0.00      LA      
+ATOM     75  C   TYR A  79      60.059  11.578  65.812  3.00  0.00      LA      
+ATOM     76  O   TYR A  79      59.403  11.822  66.834  3.00  0.00      LA     -
+ATOM     77  N   ILE A  81      61.981  14.721  65.964 12.00  0.00      LA     -
+ATOM     78  CA  ILE A  81      62.134  16.150  66.166 12.00  0.00      LA      
+ATOM     79  C   ILE A  81      61.111  16.732  67.132 12.00  0.00      LA      
+ATOM     80  O   ILE A  81      59.923  16.445  67.035 12.00  0.00      LA     -

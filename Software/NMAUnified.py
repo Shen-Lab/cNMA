@@ -1026,16 +1026,16 @@ class NMAUnified(TNMABase):
 			
 
 			# sampling
-# Yue edited on Feb 21,2019: close sampling
-
+# Yue edited on Feb 21,2019: close Prody sampling
+			'''
 			if self.config.investigationsOn == "Individual":
 				proteinFrom = encounter.getReference()
 				anmReferenceTemp = encounter.accessANMs().getANMReference()
 				anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=True)
 
 				ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
-			
-			if self.config.investigationsOn == "Complex":
+			'''
+			if self.config.investigationsOn == "Complex" or 'Individual':
 				#print 'rrrrrrrrrrrrrrrrrrrrrrrrr'
 				proteinFrom = encounter.unboundComplexAligned.complex
 				anmReferenceTemp = encounter.accessANMs().getANMComplexSlc()
@@ -1043,11 +1043,10 @@ class NMAUnified(TNMABase):
 				#print anmReferenceTemp[0].getEigvals()
 		
 				anmReference = extendModel(anmReferenceTemp[0], anmReferenceTemp[1], proteinFrom, norm=False)
-				#print anmReference[0][6:106].getVariance()
-				#exit(0)
+				
 				nresir=len (encounter.accessANMs().getANMReference()[0].getArray())/3
 				Samples = complex_sampling(anmReferenceTemp[0], anmReference[0], nresir, proteinFrom, RMSDPredicted)
-				ensem = Samples.generate(50)
+				ensem = Samples.generate(self.config.numOfsamples, self.config.rrmsd, self.config.k, self.config.th_lrmsd)
 			#	ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
 
 

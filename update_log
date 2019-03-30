@@ -7,7 +7,7 @@ Oliwa, T. and Shen, Y. (2015). cNMA: a framework of encounter complex-based norm
 
 Chen, H., Sun, Y., and Shen, Y. Predicting protein conformational changes for unbound and homology docking: Learning from intrinsic and induced flexibility.  Proteins: Structure, Function, and Bioinformatics, epub ahead of print, 10.1002/prot.25212 
 
-
+Yue Cao and Yang Shen, Bayesian active learning for optimization and uncertainty quantification in protein docking, arXiv preprint arXiv:1902.00067, 2019
 
 Version 1.0.0 Sep. 12 2016
 
@@ -29,3 +29,10 @@ Update:
 1. Fixed bug on generating complex conformational samples due to package update.
 2. Added Example4 for complex conformational samples by adding complex version in NMAUnified and also trained complex model.
 3. Removeed false error/warning messages by updating ResultsPrinter.py.
+
+
+Version 1.1.2 Mar. 28 2019
+update:
+1. Add complex sampling. (Sampling.py)
+2. Add parameters of sampling inti 'Configuration.py' file
+3. Remove the Example4.
