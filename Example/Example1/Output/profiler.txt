@@ -1,25 +1,25 @@
-Sat Mar 30 11:02:39 2019    /home/cyppsp/cNMA_github/Example/Example1/Output/profiler.pro
+Sat Mar 30 20:09:38 2019    /home/cyppsp/cNMA_github/Example/Example1/Output/profiler.pro
 
-         1663245 function calls (1646778 primitive calls) in 5.294 seconds
+         1657519 function calls (1641052 primitive calls) in 5.412 seconds
 
    Ordered by: cumulative time
    List reduced from 1008 to 15 due to restriction <15>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000    5.294    5.294 /home/cyppsp/cNMA_github//Software/NMAUnified.py:853(mainCalculation)
-        1    0.000    0.000    1.945    1.945 /home/cyppsp/cNMA_github//Software/NMAUnified.py:314(setupNMA)
-        1    0.007    0.007    1.799    1.799 /home/cyppsp/cNMA_github/Software/ANMs.py:144(calcANMsUnified)
-        5    1.439    0.288    1.537    0.307 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/proteins/pdbfile.py:784(writePDBStream)
-        1    0.000    0.000    1.506    1.506 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:342(writeSampleResults)
-        1    0.000    0.000    1.506    1.506 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/proteins/pdbfile.py:924(writePDB)
-        1    0.000    0.000    0.848    0.848 /home/cyppsp/cNMA_github//Software/NMAUnified.py:720(outputResults)
+        1    0.001    0.001    5.412    5.412 /home/cyppsp/cNMA_github//Software/NMAUnified.py:853(mainCalculation)
+        1    0.000    0.000    2.034    2.034 /home/cyppsp/cNMA_github//Software/NMAUnified.py:314(setupNMA)
+        1    0.005    0.005    1.899    1.899 /home/cyppsp/cNMA_github/Software/ANMs.py:144(calcANMsUnified)
+        5    1.243    0.249    1.330    0.266 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/proteins/pdbfile.py:784(writePDBStream)
+        1    0.000    0.000    1.302    1.302 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:342(writeSampleResults)
+        1    0.000    0.000    1.301    1.301 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/proteins/pdbfile.py:924(writePDB)
+        1    0.000    0.000    0.983    0.983 /home/cyppsp/cNMA_github//Software/NMAUnified.py:720(outputResults)
+        1    0.000    0.000    0.829    0.829 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:942(writeNMDResults)
+     3377    0.023    0.000    0.729    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/pointer.py:46(__eq__)
         2    0.003    0.001    0.726    0.363 /home/cyppsp/cNMA_github/Software/ANMs.py:1360(calcCustomH_ANew)
-        1    0.000    0.000    0.667    0.667 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:942(writeNMDResults)
-     3377    0.020    0.000    0.660    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/pointer.py:46(__eq__)
-     3405    0.037    0.000    0.606    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:263(__eq__)
-     3387    0.007    0.000    0.537    0.000 {all}
-    45366    0.359    0.000    0.531    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:270(<genexpr>)
-       48    0.008    0.000    0.507    0.011 /home/cyppsp/cNMA_github/Software/Utils.py:374(getMatchingStructureSelections)
-        1    0.103    0.103    0.478    0.478 /home/cyppsp/cNMA_github/Software/Sampling.py:125(generate)
+     3405    0.039    0.000    0.668    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:263(__eq__)
+     3387    0.007    0.000    0.594    0.000 {all}
+       48    0.009    0.000    0.591    0.012 /home/cyppsp/cNMA_github/Software/Utils.py:374(getMatchingStructureSelections)
+    45366    0.389    0.000    0.586    0.000 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/atomic/atomgroup.py:270(<genexpr>)
+        4    0.538    0.135    0.538    0.135 {posix.system}
 
 

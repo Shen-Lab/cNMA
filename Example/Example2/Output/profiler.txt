@@ -1,25 +1,25 @@
-Sat Mar 30 10:34:29 2019    /home/cyppsp/cNMA_github/Example/Example2/Output/profiler.pro
+Sat Mar 30 20:12:12 2019    /home/cyppsp/cNMA_github/Example/Example2/Output/profiler.pro
 
-         133296 function calls (131931 primitive calls) in 1.051 seconds
+         133296 function calls (131931 primitive calls) in 1.014 seconds
 
    Ordered by: cumulative time
    List reduced from 422 to 15 due to restriction <15>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.002    0.002    1.051    1.051 /home/cyppsp/cNMA_github//Software/NMAUnified.py:853(mainCalculation)
-        1    0.000    0.000    0.444    0.444 /home/cyppsp/cNMA_github/Software/ANMs.py:591(_calcANMsUnified)
-        1    0.000    0.000    0.402    0.402 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:942(writeNMDResults)
-        1    0.000    0.000    0.319    0.319 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:283(calcANM)
-        2    0.270    0.135    0.270    0.135 {posix.system}
-        1    0.000    0.000    0.229    0.229 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:180(calcModes)
-        1    0.226    0.226    0.226    0.226 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/linalg/decomp.py:270(eigh)
-        1    0.000    0.000    0.159    0.159 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:396(writeDirectResults)
-        4    0.129    0.032    0.158    0.040 /home/cyppsp/anaconda2/lib/python2.7/site-packages/numpy/lib/npyio.py:1152(savetxt)
-        1    0.002    0.002    0.131    0.131 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/nmdfile.py:340(writeNMD)
-      403    0.124    0.000    0.124    0.000 {method 'tofile' of 'numpy.ndarray' objects}
-        1    0.062    0.062    0.090    0.090 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:67(buildHessian)
-        1    0.043    0.043    0.064    0.064 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/editing.py:72(extendModel)
-        1    0.000    0.000    0.060    0.060 /home/cyppsp/cNMA_github/Software/ANMs.py:616(getNormalizedANM)
-        1    0.002    0.002    0.060    0.060 /home/cyppsp/cNMA_github/Software/ANMs.py:2121(normalizeM)
+        1    0.003    0.003    1.014    1.014 /home/cyppsp/cNMA_github//Software/NMAUnified.py:853(mainCalculation)
+        1    0.000    0.000    0.412    0.412 /home/cyppsp/cNMA_github/Software/ANMs.py:591(_calcANMsUnified)
+        1    0.000    0.000    0.385    0.385 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:942(writeNMDResults)
+        1    0.000    0.000    0.287    0.287 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:283(calcANM)
+        2    0.265    0.132    0.265    0.132 {posix.system}
+        1    0.000    0.000    0.182    0.182 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:180(calcModes)
+        1    0.179    0.179    0.180    0.180 /home/cyppsp/anaconda2/lib/python2.7/site-packages/scipy/linalg/decomp.py:270(eigh)
+        1    0.000    0.000    0.166    0.166 /home/cyppsp/cNMA_github/Software/ResultsPrinter.py:396(writeDirectResults)
+        4    0.133    0.033    0.164    0.041 /home/cyppsp/anaconda2/lib/python2.7/site-packages/numpy/lib/npyio.py:1152(savetxt)
+        1    0.002    0.002    0.119    0.119 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/nmdfile.py:340(writeNMD)
+      403    0.112    0.000    0.112    0.000 {method 'tofile' of 'numpy.ndarray' objects}
+        1    0.072    0.072    0.105    0.105 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/anm.py:67(buildHessian)
+        1    0.000    0.000    0.063    0.063 /home/cyppsp/cNMA_github/Software/ANMs.py:616(getNormalizedANM)
+        1    0.002    0.002    0.062    0.062 /home/cyppsp/cNMA_github/Software/ANMs.py:2121(normalizeM)
+        1    0.043    0.043    0.061    0.061 /home/cyppsp/anaconda2/lib/python2.7/site-packages/prody/dynamics/editing.py:72(extendModel)
 
 

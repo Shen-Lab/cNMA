@@ -37,7 +37,7 @@ class complex_sampling():
 
 		# top k comple normal modes:
 
-		ind=np.arange(0, self.k).tolist()
+		ind=np.arange(0, self.k1).tolist()
 
 		#eigenvalues rescaled:
 		rescale_eigval = np.divide(self.eigval , np.linalg.norm(self.eigvec.T[0: self.nresir*3].T, axis=1)**2 )
@@ -49,7 +49,7 @@ class complex_sampling():
 		for i in range(len(indrec)):
 			if(indrec[i] not in ind):
 				ind.append(indrec[i])
-				if(len(ind) ==2*self.k):
+				if(len(ind) == self.k1 + self.k2):
 					break
 
 		'''
@@ -122,13 +122,14 @@ class complex_sampling():
 
 
 
-	def generate(self, n_confs=100, rrmsd=None, k=6, th_lrmsd=6):
+	def generate(self, n_confs=100, rrmsd=None, k1=9, k2=3, th_lrmsd=6):
 		'''
 		This program is for generating new conformations.
 		'''
 		self.n_confs = n_confs
 		self.rrmsd=rrmsd
-		self.k = k
+		self.k1 = k1
+		self.k2 = k2
 		self.th_lrmsd = th_lrmsd
 		self.eigval = self.allresidue.getEigvals()[6:]
 		self.eigvec = self.allresidue.getArray().T[6:]
@@ -167,7 +168,7 @@ class complex_sampling():
 			x, Rrmsd, Lrmsd = self.rejectsampling(ind)
 			coords = np.zeros(3*n_atoms)			
 			
-			for j in range(2*k):
+			for j in range(k1+k2):
 				
 				coords +=  x[j]/np.sqrt(self.eigval[ind[j]]) * array[ind[j]]
 

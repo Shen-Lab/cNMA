@@ -1046,7 +1046,7 @@ class NMAUnified(TNMABase):
 				
 				nresir=len (encounter.accessANMs().getANMReference()[0].getArray())/3
 				Samples = complex_sampling(anmReferenceTemp[0], anmReference[0], nresir, proteinFrom, RMSDPredicted)
-				ensem = Samples.generate(self.config.numOfsamples, self.config.rrmsd, self.config.k, self.config.th_lrmsd)
+				ensem = Samples.generate(self.config.numOfsamples, self.config.rrmsd, self.config.k1, self.config.k2, self.config.th_lrmsd)
 			#	ensem = sampleModes(anmReference[0][6:106], proteinFrom, 100, RMSDPredicted)
 
 

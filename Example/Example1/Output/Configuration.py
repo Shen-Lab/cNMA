@@ -55,7 +55,8 @@ class Configurations(object):
 		self.rrmsd=None       # self.defined rmsd of receptor, if None it will sample from the Gaussian(0.99,0.31)*predicted_rmsd
 		self.th_lrmsd=6       # the threshold for ligand motion
 		self.numOfsamples=100 # the number of samples to generate
-		self.k=6             # 2k is the total number of normal modes
+		self.k1=9             # number of top normal modes (ranked by eigenvalues) used for generating samples
+		self.k2=3             # number of top normal modes (ranked by re-scaled eigenvalues) used for generating samples
 
 		self.complexRMSDreduction = "HC_subvector" # for complex: 1k1k or 2k or 1k1k6
 		self.whichCustomHC = "HC_U1" # HC_0 or HC_U1
